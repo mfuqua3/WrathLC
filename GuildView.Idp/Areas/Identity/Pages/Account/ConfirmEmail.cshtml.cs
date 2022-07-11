@@ -2,7 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using System;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using GuildView.Idp.ResourceAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,9 +17,9 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<OidcUser> _userManager;
+        private readonly UserManager<GuildViewUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<OidcUser> userManager)
+        public ConfirmEmailModel(UserManager<GuildViewUser> userManager)
         {
             _userManager = userManager;
         }

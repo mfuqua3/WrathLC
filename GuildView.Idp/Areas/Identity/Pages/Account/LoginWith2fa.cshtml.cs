@@ -2,22 +2,30 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
+using GuildView.Idp.ResourceAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace GuildView.Idp.Areas.Identity.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {
-        private readonly SignInManager<OidcUser> _signInManager;
-        private readonly UserManager<OidcUser> _userManager;
+        private readonly SignInManager<GuildViewUser> _signInManager;
+        private readonly UserManager<GuildViewUser> _userManager;
         private readonly ILogger<LoginWith2faModel> _logger;
 
         public LoginWith2faModel(
-            SignInManager<OidcUser> signInManager,
-            UserManager<OidcUser> userManager,
+            SignInManager<GuildViewUser> signInManager,
+            UserManager<GuildViewUser> userManager,
             ILogger<LoginWith2faModel> logger)
         {
             _signInManager = signInManager;

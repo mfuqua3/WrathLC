@@ -2,9 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Threading.Tasks;
+using GuildView.Idp.ResourceAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +18,13 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account.Manage
 {
     public class EmailModel : PageModel
     {
-        private readonly UserManager<OidcUser> _userManager;
-        private readonly SignInManager<OidcUser> _signInManager;
+        private readonly UserManager<GuildViewUser> _userManager;
+        private readonly SignInManager<GuildViewUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<OidcUser> userManager,
-            SignInManager<OidcUser> signInManager,
+            UserManager<GuildViewUser> userManager,
+            SignInManager<GuildViewUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -71,7 +74,7 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(OidcUser user)
+        private async Task LoadAsync(GuildViewUser user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;

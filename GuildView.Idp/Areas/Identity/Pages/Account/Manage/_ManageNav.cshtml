@@ -1,6 +1,4 @@
-@using Dotnet.Idp.Data
-@using GuildView.Idp.Areas.Identity.Pages.Account.Manage
-@inject SignInManager<OidcUser> SignInManager
+@inject SignInManager<GuildViewUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

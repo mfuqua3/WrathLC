@@ -2,31 +2,39 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using GuildView.Idp.ResourceAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 
 namespace GuildView.Idp.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<OidcUser> _signInManager;
-        private readonly UserManager<OidcUser> _userManager;
-        private readonly IUserStore<OidcUser> _userStore;
-        private readonly IUserEmailStore<OidcUser> _emailStore;
+        private readonly SignInManager<GuildViewUser> _signInManager;
+        private readonly UserManager<GuildViewUser> _userManager;
+        private readonly IUserStore<GuildViewUser> _userStore;
+        private readonly IUserEmailStore<GuildViewUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<OidcUser> userManager,
-            IUserStore<OidcUser> userStore,
-            SignInManager<OidcUser> signInManager,
+            UserManager<GuildViewUser> userManager,
+            IUserStore<GuildViewUser> userStore,
+            SignInManager<GuildViewUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -147,27 +155,27 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private OidcUser CreateUser()
+        private GuildViewUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<OidcUser>();
+                return Activator.CreateInstance<GuildViewUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(OidcUser)}'. " +
-                    $"Ensure that '{nameof(OidcUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(GuildViewUser)}'. " +
+                    $"Ensure that '{nameof(GuildViewUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<OidcUser> GetEmailStore()
+        private IUserEmailStore<GuildViewUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<OidcUser>)_userStore;
+            return (IUserEmailStore<GuildViewUser>)_userStore;
         }
     }
 }

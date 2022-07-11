@@ -2,7 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+using GuildView.Idp.ResourceAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,12 +14,12 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<OidcUser> _userManager;
-        private readonly SignInManager<OidcUser> _signInManager;
+        private readonly UserManager<GuildViewUser> _userManager;
+        private readonly SignInManager<GuildViewUser> _signInManager;
 
         public SetPasswordModel(
-            UserManager<OidcUser> userManager,
-            SignInManager<OidcUser> signInManager)
+            UserManager<GuildViewUser> userManager,
+            SignInManager<GuildViewUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

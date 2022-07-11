@@ -2,7 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
+using GuildView.Idp.ResourceAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,12 +15,12 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<OidcUser> _userManager;
-        private readonly SignInManager<OidcUser> _signInManager;
+        private readonly UserManager<GuildViewUser> _userManager;
+        private readonly SignInManager<GuildViewUser> _signInManager;
 
         public IndexModel(
-            UserManager<OidcUser> userManager,
-            SignInManager<OidcUser> signInManager)
+            UserManager<GuildViewUser> userManager,
+            SignInManager<GuildViewUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -57,7 +61,7 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(OidcUser user)
+        private async Task LoadAsync(GuildViewUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

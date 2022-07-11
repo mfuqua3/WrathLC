@@ -2,6 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using GuildView.Idp.ResourceAccess;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,14 +17,14 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<OidcUser> _userManager;
-        private readonly SignInManager<OidcUser> _signInManager;
-        private readonly IUserStore<OidcUser> _userStore;
+        private readonly UserManager<GuildViewUser> _userManager;
+        private readonly SignInManager<GuildViewUser> _signInManager;
+        private readonly IUserStore<GuildViewUser> _userStore;
 
         public ExternalLoginsModel(
-            UserManager<OidcUser> userManager,
-            SignInManager<OidcUser> signInManager,
-            IUserStore<OidcUser> userStore)
+            UserManager<GuildViewUser> userManager,
+            SignInManager<GuildViewUser> signInManager,
+            IUserStore<GuildViewUser> userStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -64,7 +70,7 @@ namespace GuildView.Idp.Areas.Identity.Pages.Account.Manage
                 .ToList();
 
             string passwordHash = null;
-            if (_userStore is IUserPasswordStore<OidcUser> userPasswordStore)
+            if (_userStore is IUserPasswordStore<GuildViewUser> userPasswordStore)
             {
                 passwordHash = await userPasswordStore.GetPasswordHashAsync(user, HttpContext.RequestAborted);
             }
