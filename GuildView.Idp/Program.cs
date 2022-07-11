@@ -17,7 +17,6 @@ public static class Program
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
-
                 var port = Environment.GetEnvironmentVariable("PORT");
                 if (!string.IsNullOrEmpty(port))
                 {
