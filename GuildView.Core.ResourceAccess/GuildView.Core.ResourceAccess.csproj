@@ -8,7 +8,6 @@
     <ItemGroup>
       <ProjectReference Include="..\GuildView.Common.ResourceAccess\GuildView.Common.ResourceAccess.csproj" />
       <ProjectReference Include="..\GuildView.Common.Utilities\GuildView.Common.Utilities.csproj" />
-      <ProjectReference Include="..\GuildView.Idp.Data\GuildView.Idp.Data.csproj" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />

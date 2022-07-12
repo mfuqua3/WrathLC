@@ -4,11 +4,20 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GuildView.Common.ResourceAccess\GuildView.Common.ResourceAccess.csproj" />
+      <ProjectReference Include="..\GuildView.Common.Utilities\GuildView.Common.Utilities.csproj" />
+      <ProjectReference Include="..\GuildView.Core.Business\GuildView.Core.Business.csproj" />
+      <ProjectReference Include="..\GuildView.Core.Data\GuildView.Core.Data.csproj" />
+      <ProjectReference Include="..\GuildView.Core.ResourceAccess\GuildView.Core.ResourceAccess.csproj" />
     </ItemGroup>
 
 </Project>
