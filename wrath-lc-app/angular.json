@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "guildview-app": {
+    "wrath-lc-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/guildview-app",
+            "outputPath": "dist/wrath-lc-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "guildview-app:build:production"
+              "browserTarget": "wrath-lc-app:build:production"
             },
             "development": {
-              "browserTarget": "guildview-app:build:development"
+              "browserTarget": "wrath-lc-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "guildview-app:build"
+            "browserTarget": "wrath-lc-app:build"
           }
         },
         "test": {
