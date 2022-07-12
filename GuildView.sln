@@ -20,6 +20,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildView.Core.Data", "Guil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildView.Idp.Data", "GuildView.Idp.Data\GuildView.Idp.Data.csproj", "{880C3349-2277-4F68-9CD9-4D80A291F717}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8BD7526A-751D-4406-B4F8-5D2074E1AE78}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	docker-compose.yml = docker-compose.yml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

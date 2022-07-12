@@ -1,25 +1,28 @@
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
 
-// Add services to the container.
+namespace GuildView.Api;
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public static class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .UseSerilog((ctx, lc) =>
+            {
+                lc.ReadFrom.Configuration(ctx.Configuration);
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                var port = Environment.GetEnvironmentVariable("PORT");
+                if (!string.IsNullOrEmpty(port))
+                {
+                    webBuilder.UseUrls($"https://*:{port}");
+                }
+                webBuilder.UseStartup<Startup>();
+            });
+
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

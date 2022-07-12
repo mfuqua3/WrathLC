@@ -4,6 +4,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+ARG CONFIGURATION
 WORKDIR /src
 COPY ["GuildView.Idp/GuildView.Idp.csproj", "GuildView.Idp/"]
 COPY ["GuildView.Idp.ResourceAccess/GuildView.Idp.ResourceAccess.csproj", "GuildView.Idp.ResourceAccess/"]
@@ -14,10 +15,11 @@ COPY ["GuildView.Idp.Managers/GuildView.Idp.Managers.csproj", "GuildView.Idp.Man
 RUN dotnet restore "GuildView.Idp/GuildView.Idp.csproj"
 COPY . .
 WORKDIR "/src/GuildView.Idp"
-RUN dotnet build "GuildView.Idp.csproj" -c Release -o /app/build
+RUN dotnet build "GuildView.Idp.csproj" -c $CONFIGURATION -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "GuildView.Idp.csproj" -c Release -o /app/publish
+ARG CONFIGURATION
+RUN dotnet publish "GuildView.Idp.csproj" -c $CONFIGURATION -o /app/publish
 
 FROM base AS final
 WORKDIR /app

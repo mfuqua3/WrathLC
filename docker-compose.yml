@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "8502:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=guildview
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  idp:
+    build:
+      dockerfile: ./GuildView.Idp/Dockerfile
+      context: .
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+        - CONFIGURATION=Debug
+    image: "idp"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8500:8500"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    stdin_open: true # -i
+    tty: true # -t
+    environment:
+      ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Database=guildview;User Id=postgres;Password=password"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "password"
+      PORT: 8500
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "https://localhost:8500/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+#  api:
+#    build:
+#      dockerfile: ./Dockerfile
+#      context: ./GuildView.Api
+#      args:
+#        - http_proxy
+#        - https_proxy
+#        - no_proxy
+#        - configuration=Debug
+#    image: "api"
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#      idp:
+#        condition: service_healthy
+#    ports:
+#      - "8501:8501"
+#    stdin_open: true # -i
+#    tty: true # -t
+#    environment:
+#      ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Database=guildview;User Id=postgres;Password=password"
+#      ASPNETCORE_ENVIRONMENT: "Development"
+#      PORT: 8501
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "https://localhost:8501/health" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5

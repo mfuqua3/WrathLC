@@ -86,6 +86,7 @@ public class Startup
                 options.ClientId = discordConfigSection["ClientId"];
                 options.ClientSecret = discordConfigSection["ClientSecret"];
             });
+        services.AddHealthChecks();
         services.AddOptions<OidcClientsConfiguration>()
             .Bind(Configuration)
             .ValidateDataAnnotations();
@@ -120,6 +121,7 @@ public class Startup
             endpoints.MapControllers();
             endpoints.MapDefaultControllerRoute();
             endpoints.MapRazorPages();
+            endpoints.MapHealthChecks("/health");
         });
     }
 }
