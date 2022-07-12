@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>WrathLc.Idp.ResourceAccess</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.1.1" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\WrathLC.Common.ResourceAccess\WrathLC.Common.ResourceAccess.csproj" />
+      <ProjectReference Include="..\WrathLC.Common.Utilities\WrathLC.Common.Utilities.csproj" />
+      <ProjectReference Include="..\WrathLC.Idp.Data\WrathLC.Idp.Data.csproj" />
+    </ItemGroup>
+
+</Project>
