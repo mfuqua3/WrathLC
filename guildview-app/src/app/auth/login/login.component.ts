@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ClrLoadingState} from "@clr/angular";
 import AuthService from "../auth.service";
 
 @Component({
@@ -8,17 +7,15 @@ import AuthService from "../auth.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginButtonState: ClrLoadingState = ClrLoadingState.DEFAULT;
 
   constructor(private readonly authService: AuthService) {
   }
 
   async login() {
-    this.loginButtonState = ClrLoadingState.LOADING;
     try {
       await this.authService.signInRedirect();
     } finally {
-      this.loginButtonState = ClrLoadingState.DEFAULT;
+      console.log("sigin succeeded");
     }
   }
 
