@@ -7,3 +7,5 @@ riderModule.iml
 appsettings.*.json
 environment.*.ts
 postgres-data/
+seq-data/
+%USERPROFILE%/

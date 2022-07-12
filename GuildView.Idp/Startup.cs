@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OpenIddict.Abstractions;
 using Quartz;
+using Serilog;
 
 namespace GuildView.Idp;
 
@@ -104,6 +105,7 @@ public class Startup
             app.UseStatusCodePagesWithReExecute("~/error");
         }
         app.UseHttpsRedirection();
+        app.UseSerilogRequestLogging();
         app.UseStaticFiles();
         app.UseCors(opt =>
         {

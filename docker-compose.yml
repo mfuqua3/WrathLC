@@ -5,7 +5,7 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - "8502:5432"
+      - "8510:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     environment:
@@ -17,6 +17,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  seq:
+    image: datalust/seq
+    ports:
+      - "8511:80"
+      - "8512:5341"
+    volumes:
+      - ./seq-data:/data
+    environment:
+      ACCEPT_EULA: "Y"
   idp:
     build:
       dockerfile: ./GuildView.Idp/Dockerfile
@@ -38,40 +47,48 @@ services:
     tty: true # -t
     environment:
       ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Database=guildview;User Id=postgres;Password=password"
+      Serilog:WriteTo:0:Name: "Console"
+      Serilog:WriteTo:1:Name: "Seq"
+      Serilog:WriteTo:1:Args:serverUrl: "http://seq:5341"
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
       ASPNETCORE_Kestrel__Certificates__Default__Password: "password"
       PORT: 8500
     healthcheck:
-      test: [ "CMD", "curl", "-f", "https://localhost:8500/health" ]
+      test: [ "CMD", "curl", "-f", "https://idp:8500/health" ]
       interval: 10s
       timeout: 5s
       retries: 5
-#  api:
-#    build:
-#      dockerfile: ./Dockerfile
-#      context: ./GuildView.Api
-#      args:
-#        - http_proxy
-#        - https_proxy
-#        - no_proxy
-#        - configuration=Debug
-#    image: "api"
-#    depends_on:
-#      postgres:
-#        condition: service_healthy
-#      idp:
-#        condition: service_healthy
-#    ports:
-#      - "8501:8501"
-#    stdin_open: true # -i
-#    tty: true # -t
-#    environment:
-#      ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Database=guildview;User Id=postgres;Password=password"
-#      ASPNETCORE_ENVIRONMENT: "Development"
-#      PORT: 8501
-#    healthcheck:
-#      test: [ "CMD", "curl", "-f", "https://localhost:8501/health" ]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 5
+  api:
+    build:
+      dockerfile: ./GuildView.Api/Dockerfile
+      context: .
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+        - CONFIGURATION=Debug
+    image: "api"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8501:8501"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    stdin_open: true # -i
+    tty: true # -t
+    environment:
+      ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Database=guildview;User Id=postgres;Password=password"
+      Serilog:WriteTo:0:Name: "Console"
+      Serilog:WriteTo:1:Name: "Seq"
+      Serilog:WriteTo:1:Args:serverUrl: "http://seq:5341"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "password"
+      PORT: 8501
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "https://api:8501/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5

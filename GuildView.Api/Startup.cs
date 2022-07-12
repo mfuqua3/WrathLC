@@ -1,28 +1,36 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using GuildView.Core.ResourceAccess;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GuildView.Api;
 
 public class Startup
 {
     public Startup(IConfiguration configuration)
-        => Configuration = configuration;
+        => _configuration = configuration;
 
-    public IConfiguration Configuration { get; }
+    private readonly IConfiguration _configuration;
 
     public void ConfigureServices(IServiceCollection services)
     {
+        var connectionString = _configuration.GetConnectionString("DefaultConnection");
+        services.AddDbContext<GuildViewDbContext>(opt => { opt.UseNpgsql(connectionString); });
+        services.AddControllers();
+        services.AddHealthChecks();
+        services.AddSwaggerGen();
+        services.AddAuthentication();
+        services.AddAuthorization();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GuildViewDbContext dbContext)
     {
         if (env.IsDevelopment())
         {
-            app.UseDeveloperExceptionPage();
+            dbContext.Database.Migrate();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
-        else
-        {
-            app.UseStatusCodePagesWithReExecute("~/error");
-        }
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseCors(opt =>
@@ -39,8 +47,6 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-            endpoints.MapDefaultControllerRoute();
-            endpoints.MapRazorPages();
             endpoints.MapHealthChecks("/health");
         });
     }

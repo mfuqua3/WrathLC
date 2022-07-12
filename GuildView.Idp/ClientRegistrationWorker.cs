@@ -58,14 +58,10 @@ public class ClientRegistrationWorker : BackgroundService
             clientDescriptor.Permissions.AddRange(GuildViewScopes.AllScopes);
             clientDescriptor.RedirectUris.AddRange(client.RedirectUris.Select(x => new Uri(x)));
 
-            var existing = await manager.FindByIdAsync(client.ClientId, stoppingToken);
+            var existing = await manager.FindByClientIdAsync(client.ClientId, stoppingToken);
             if (existing == null)
             {
                 await manager.CreateAsync(clientDescriptor, stoppingToken);
-            }
-            else
-            {
-                await manager.UpdateAsync(clientDescriptor, stoppingToken);
             }
         }
     }
