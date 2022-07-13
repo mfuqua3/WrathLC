@@ -35,16 +35,13 @@ export default class AuthService {
       });
 
       this.userManager.events.addAccessTokenExpired(() => {
-        console.log("token expired");
         this.signinSilent();
       });
       this.userManager.getUser()
         .then(user=> {
-          console.log(user);
           this.userSubject.next(user)
         })
         .finally(()=> {
-          console.log('initialized')
           this.initializingSubject.next(true)
         });
 
@@ -77,7 +74,8 @@ export default class AuthService {
 
 
   async isAuthenticated() {
-    return await this.userManager.getUser() !== null;
+    const user = await this.userManager.getUser();
+    return user !== null;
   };
 
   signinSilent() {

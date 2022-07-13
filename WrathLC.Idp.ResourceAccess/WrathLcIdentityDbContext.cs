@@ -7,7 +7,6 @@ public class WrathLcIdentityDbContext : IdentityDbContext<WrathLcUser>
 {
     public WrathLcIdentityDbContext(DbContextOptions<WrathLcIdentityDbContext> options):base(options)
     {
-        
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
