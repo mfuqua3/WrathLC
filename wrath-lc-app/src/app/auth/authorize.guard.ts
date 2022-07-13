@@ -14,7 +14,6 @@ export class AuthorizeGuard implements CanActivate {
   async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
-    console.log(route);
     const authorized = await this.authService.isAuthenticated();
     if (authorized) {
       return true;
