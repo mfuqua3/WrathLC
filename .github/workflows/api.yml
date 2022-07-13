@@ -28,6 +28,7 @@ jobs:
             uses: docker/build-push-action@v3
             with:
                 context: .
+                file: ./WrathLC.Api/Dockerfile
                 tags: wrathlc_api:latest
                 outputs: type=docker,dest=/tmp/wrathlc_api.tar
                 build-args: |
