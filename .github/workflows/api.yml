@@ -33,7 +33,7 @@ jobs:
                 build-args: |
                     CONFIGURATION=Release
         -
-            name: Upload Artifact:
+            name: Upload Artifact
             uses: actions/upload-artifact@v3
             with:
                 name: wrathlc_api
@@ -61,7 +61,7 @@ jobs:
             uses: actions/download-artifact@v3
             with:
                 name: wrathlc_api
-                pathL /tmp
+                path: /tmp
         -
             name: Load Image
             run: |
@@ -99,7 +99,7 @@ jobs:
         -
             name: Deploy Amazon ECS task definition
             uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-                with:
+            with:
                 task-definition: ${{ steps.task-def.outputs.task-definition }}
                 service: ${{ env.ECS_SERVICE }}
                 cluster: ${{ env.ECS_CLUSTER }}
