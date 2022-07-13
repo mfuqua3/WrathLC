@@ -55,6 +55,9 @@ jobs:
         needs: [build, approve]
         steps:
         - 
+            name: Checkout
+            uses: actions/checkout@v2
+        - 
             name: Set Up Docker Buildx
             uses: docker/setup-buildx-action@v2
         -
