@@ -39,5 +39,5 @@
   "networkMode": "awsvpc",
   "cpu": "256",
   "revision": 4,
-  "status": "ACTIVE",
+  "status": "ACTIVE"
 }
