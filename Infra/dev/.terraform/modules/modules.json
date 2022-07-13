@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"vpc","Source":"terraform-aws-modules/vpc/aws","Version":"1.26.0","Dir":".terraform/modules/vpc"},{"Key":"","Source":"","Dir":"."}]}

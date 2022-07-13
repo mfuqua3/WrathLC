@@ -9,7 +9,7 @@ terraform {
     required_version = ">= 1.0"
 
   backend "s3" {
-    bucket  = "guildview-tf"
+    bucket  = "wrathlc-terraform"
     key     = "terraform.tfstate"
     region  = "us-east-1"
     profile = "tfuser"

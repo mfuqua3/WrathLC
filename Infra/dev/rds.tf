@@ -20,7 +20,7 @@ resource "aws_security_group" "wrathlc_db" {
 
 resource "aws_db_subnet_group" "default" {
   name = "main"
-  subnet_ids = [aws_subnet.database.id]
+  subnet_ids = [aws_subnet.database1a.id, aws_subnet.database1b.id]
 }
 resource "aws_db_instance" "wrathlc" {
   allocated_storage           = 20

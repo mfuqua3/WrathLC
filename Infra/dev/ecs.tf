@@ -56,7 +56,8 @@ resource "aws_alb" "wrathlc" {
   internal = false
   load_balancer_type = "application"
   subnets = [
-    aws_subnet.public.id,
+    aws_subnet.public1a.id,
+    aws_subnet.public1b.id,
   ]
   security_groups = [
     aws_security_group.http.id,
@@ -172,7 +173,8 @@ resource "aws_ecs_service" "wrathlc_api" {
         aws_security_group.ingress_api.id
       ]
       subnets = [
-        aws_subnet.public.id
+        aws_subnet.public1a.id,
+        aws_subnet.public1b.id
       ]
     }
     load_balancer {
@@ -194,7 +196,8 @@ resource "aws_ecs_service" "wrathlc_idp" {
       aws_security_group.ingress_api.id
     ]
     subnets = [
-      aws_subnet.public.id
+      aws_subnet.public1a.id,
+      aws_subnet.public1b.id
     ]
   }
   load_balancer {

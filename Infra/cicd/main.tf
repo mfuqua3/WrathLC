@@ -3,7 +3,7 @@ provider "aws" {
 }
 terraform {
   backend "s3" {
-    bucket  = "brokervault-terraform"
+    bucket  = "wrathlc-terraform"
     key    = "cicd"
     region = "us-east-1"
   }
@@ -12,7 +12,7 @@ data "terraform_remote_state" "infra" {
   backend = "s3"
 
   config = {
-    bucket = "brokervault-terraform"
+    bucket = "wrathlc-terraform"
     key    = "nonprod-infra"
     region = "us-east-1"
   }
@@ -20,16 +20,16 @@ data "terraform_remote_state" "infra" {
 
 
 resource "aws_s3_bucket" "github" {
-  bucket = "guildview-cicd"
+  bucket = "wrathlc-cicd"
 }
 
 resource "aws_s3_bucket_acl" "gitlab_bucket_acl" {
-  bucket = aws_s3_bucket.github.id,
+  bucket = aws_s3_bucket.github.id
   acl = "private"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "server_side_encryption_config" {
-  bucket = aws_s3_bucket.github.id,
+  bucket = aws_s3_bucket.github.id
   rule {
     apply_server_side_encryption_by_default {
       sse_algorithm     = "AES256"

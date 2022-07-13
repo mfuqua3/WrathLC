@@ -1,27 +1,29 @@
 # network.tf
-resource "aws_vpc" "app_vpc" {
-  cidr_block = "10.0.0.0/16"
-}
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 1.26.0"
 
-resource "aws_subnet" "public" {
-  vpc_id            = aws_vpc.app_vpc.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-east-1d"
+  name               = "app-dev"
+  cidr               = "10.10.10.0/24"
+  azs                = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  database_subnets    = ["10.10.10.0/27", "10.10.10.32/27", "10.10.10.64/27"]
+  public_subnets     = ["10.10.10.96/27", "10.10.10.128/27", "10.10.10.160/27"]
+  tags               = {
+    Environment = "dev"
+    Owner = "me"
+  }
 }
-
-resource "aws_subnet" "database" {
-  vpc_id            = aws_vpc.app_vpc.id
-  cidr_block        = "10.0.51.0/24"
-  availability_zone = "us-east-1d"
-}
-
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.app_vpc.id
+  vpc_id = module.vpc.vpc_id
 }
 
 
-resource "aws_route_table_association" "public_subnet" {
-  subnet_id      = aws_subnet.public.id
+resource "aws_route_table_association" "public_subnet1a" {
+  subnet_id      = aws_subnet.public1a.id
+  route_table_id = aws_route_table.public.id
+}
+resource "aws_route_table_association" "public_subnet1b" {
+  subnet_id      = module.vpc.private_subnets[0]
   route_table_id = aws_route_table.public.id
 }
 
@@ -31,7 +33,8 @@ resource "aws_internet_gateway" "igw" {
 
 resource "aws_route" "public" {
   route_table_id         = aws_route_table.public.id
-  destination_cidr_block = aws_subnet.public.cidr_block
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.igw.id
   depends_on = [aws_internet_gateway.igw]
 }
 
@@ -117,5 +120,5 @@ output "vpc_id" {
 }
 
 output "public_subnet_id" {
-  value = aws_subnet.public.id
+  value = aws_subnet.public1a.id
 }
