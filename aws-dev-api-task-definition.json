@@ -1,0 +1,43 @@
+{
+  "executionRoleArn": "arn:aws:iam::602199015882:role/wrathlc-task-execution-role",
+  "containerDefinitions": [
+    {
+      "environmentFiles": [
+        {
+          "value": "arn:aws:s3:::wrathlc-env/dev.api.aws.env",
+          "type": "s3"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/dev/wrathlc-api",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "image": "602199015882.dkr.ecr.us-east-1.amazonaws.com/wrathlc_api:latest",
+      "name": "wrathlc_api"
+    }
+  ],
+  "memory": "512",
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "family": "wrathlc-api",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "cpu": "256",
+  "revision": 4,
+  "status": "ACTIVE",
+}
