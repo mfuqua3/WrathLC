@@ -6,7 +6,7 @@ on:
 env:
     AWS_REGION: us-east-1
     ECR_REPOSITORY: wrathlc_idp
-    ECS_SERVICE: wrathlc_idp
+    ECS_SERVICE: wrathlc-idp
     ECS_CLUSTER: wrathlc
     ECS_TASK_DEFINITION: aws-dev-idp-task-definition.json
     

@@ -6,7 +6,7 @@ on:
 env:
     AWS_REGION: us-east-1
     ECR_REPOSITORY: wrathlc_api
-    ECS_SERVICE: wrathlc_api
+    ECS_SERVICE: wrathlc-api
     ECS_CLUSTER: wrathlc
     ECS_TASK_DEFINITION: aws-dev-api-task-definition.json
     

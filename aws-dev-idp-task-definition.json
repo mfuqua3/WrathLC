@@ -23,21 +23,14 @@
           "containerPort": 80
         }
       ],
-      "image": "602199015882.dkr.ecr.us-east-1.amazonaws.com/wrathlc_idp:latest",
       "name": "wrathlc_idp"
     }
   ],
   "memory": "512",
-  "compatibilities": [
-    "EC2",
-    "FARGATE"
-  ],
   "family": "wrathlc-idp",
   "requiresCompatibilities": [
     "FARGATE"
   ],
   "networkMode": "awsvpc",
-  "cpu": "256",
-  "revision": 4,
-  "status": "ACTIVE"
+  "cpu": "256"
 }
