@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Log, User, UserManager, WebStorageStateStore} from "oidc-client";
-import {BehaviorSubject, lastValueFrom, Observable} from "rxjs";
-import {environment} from "../../environments/environment";
+import {BehaviorSubject, Observable} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'

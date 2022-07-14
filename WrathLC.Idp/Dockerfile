@@ -11,7 +11,7 @@ COPY ["WrathLC.Idp.ResourceAccess/WrathLC.Idp.ResourceAccess.csproj", "WrathLC.I
 COPY ["WrathLC.Common.ResourceAccess/WrathLC.Common.ResourceAccess.csproj", "WrathLC.Common.ResourceAccess/"]
 COPY ["WrathLC.Common.Utilities/WrathLC.Common.Utilities.csproj", "WrathLC.Common.Utilities/"]
 COPY ["WrathLC.Idp.Data/WrathLC.Idp.Data.csproj", "WrathLC.Idp.Data/"]
-COPY ["WrathLC.Idp.Managers/WrathLC.Idp.Managers.csproj", "WrathLC.Idp.Managers/"]
+COPY ["WrathLC.Idp.Business/WrathLC.Idp.Business.csproj", "WrathLC.Idp.Business/"]
 RUN dotnet restore "WrathLC.Idp/WrathLC.Idp.csproj"
 COPY . .
 WORKDIR "/src/WrathLC.Idp"
