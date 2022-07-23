@@ -11,4 +11,10 @@
       <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\WrathLC.Common.Utilities\WrathLC.Common.Utilities.csproj" />
+      <ProjectReference Include="..\WrathLC.Core.Data\WrathLC.Core.Data.csproj" />
+      <ProjectReference Include="..\WrathLC.Core.ResourceAccess\WrathLC.Core.ResourceAccess.csproj" />
+    </ItemGroup>
+
 </Project>
