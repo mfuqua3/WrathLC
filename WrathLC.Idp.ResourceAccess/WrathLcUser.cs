@@ -4,5 +4,4 @@ namespace WrathLc.Idp.ResourceAccess;
 
 public class WrathLcUser : IdentityUser
 {
-    
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hangfire;
+using Microsoft.EntityFrameworkCore;
+using WrathLc.Common.Utilities.Hangfire;
 using WrathLc.Core.ResourceAccess;
 
 namespace WrathLc.Api;
@@ -19,6 +21,7 @@ public class Startup
         services.AddSwaggerGen();
         services.AddAuthentication();
         services.AddAuthorization();
+        services.AddHangfire(cfg => cfg.UseWrathLcConfiguration(connectionString));
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WrathLcDbContext dbContext)

@@ -10,6 +10,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatSelectModule} from "@angular/material/select";
 import { MainLayoutComponent } from './main-layout.component';
 import {RouterModule} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -23,14 +24,15 @@ import {RouterModule} from "@angular/router";
   exports: [
     MainLayoutComponent
   ],
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatMenuModule,
-    MatSelectModule,
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatMenuModule,
+        MatSelectModule,
+        RouterModule,
+        MatButtonModule
+    ]
 })
 export class SharedModule { }

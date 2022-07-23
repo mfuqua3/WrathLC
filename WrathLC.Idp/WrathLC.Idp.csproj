@@ -32,6 +32,7 @@
     <ItemGroup>
         <ProjectReference Include="..\WrathLC.Common.ResourceAccess\WrathLC.Common.ResourceAccess.csproj" />
         <ProjectReference Include="..\WrathLC.Common.Utilities\WrathLC.Common.Utilities.csproj" />
+        <ProjectReference Include="..\WrathLC.Core.Business\WrathLC.Core.Business.csproj" />
         <ProjectReference Include="..\WrathLC.Idp.Data\WrathLC.Idp.Data.csproj" />
         <ProjectReference Include="..\WrathLC.Idp.Business\WrathLC.Idp.Business.csproj" />
         <ProjectReference Include="..\WrathLC.Idp.ResourceAccess\WrathLC.Idp.ResourceAccess.csproj" />
