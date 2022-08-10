@@ -9,5 +9,5 @@ environment.*.ts
 postgres-data/
 seq-data/
 %USERPROFILE%/
-.terraform/
+.terraform/**/*
 *.aws.env
