@@ -1,0 +1,16 @@
+<mat-toolbar class="nav-bar">
+  <mat-button-toggle-group class="nav-group">
+    <app-navlink>
+      Dashboard
+    </app-navlink>
+    <app-navlink *ngIf="activeGuild | async">
+      Loot Council
+    </app-navlink>
+    <app-navlink *ngIf="activeGuild | async">
+      Raid Planning
+    </app-navlink>
+    <app-navlink *ngIf="activeGuild | async">
+      Admin
+    </app-navlink>
+  </mat-button-toggle-group>
+</mat-toolbar>

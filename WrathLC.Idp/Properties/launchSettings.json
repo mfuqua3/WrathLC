@@ -14,7 +14,8 @@
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7182;http://localhost:5182",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Kestrel:Certificates:Development:Password": "password"
       }
     },
     "IIS Express": {
@@ -22,7 +23,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Kestrel:Certificates:Development:Password": "password"
       }
     }
   }

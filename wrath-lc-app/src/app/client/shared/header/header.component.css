@@ -1,0 +1,32 @@
+.header {
+  background-color: #001970;
+  height: 35px;
+  color:white;
+  font-size: 20px;
+}
+.header-spacer {
+  flex: 1 1 auto;
+}
+.icon-text {
+  margin-left: 10px;
+}
+.header-item {
+  max-height: 100%;
+}
+.header-select {
+  width: 125px;
+  border: 1px solid white;
+  padding: 2px 8px 2px 8px;
+}
+.header-button, .header-select {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #001970;
+  color: white;
+  font-size: 14px;
+}
+.header-button{
+  border: 0;
+}

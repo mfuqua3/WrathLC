@@ -128,7 +128,6 @@ public class AuthorizationController : Controller
                 // Create the claims-based identity that will be used by OpenIddict to generate tokens.
                 var identity = new ClaimsIdentity(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)
                     .AddClaim(OpenIddictConstants.Claims.Subject, await _userManager.GetUserIdAsync(user))
-                    .AddClaim(OpenIddictConstants.Claims.Email, await _userManager.GetEmailAsync(user))
                     .AddClaim(OpenIddictConstants.Claims.Name, await _userManager.GetUserNameAsync(user));
                 var roles = await _userManager.GetRolesAsync(user);
                 identity.AddClaims(roles.Select(role => new Claim(OpenIddictConstants.Claims.Role, role)));

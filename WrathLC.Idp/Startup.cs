@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OpenIddict.Abstractions;
 using Quartz;
 using Serilog;
+using WrathLc.Common.Utilities.Discord;
+using WrathLc.Common.Utilities.Hangfire;
+using WrathLc.Core.Managers;
+using WrathLc.Core.ResourceAccess;
 using WrathLc.Idp.Data;
 using WrathLc.Idp.ResourceAccess;
 
@@ -25,9 +30,17 @@ public class Startup
             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             options.UseOpenIddict();
         });
+        services.AddDbContext<WrathLcDbContext>(options =>
+        {
+            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+        });
 
         // Register the Identity services.
-        services.AddIdentity<WrathLcUser, IdentityRole>()
+        services.AddIdentity<WrathLcUser, IdentityRole>(cfg =>
+            {
+                cfg.SignIn.RequireConfirmedEmail = false;
+                cfg.User.RequireUniqueEmail = false;
+            })
             .AddEntityFrameworkStores<WrathLcIdentityDbContext>()
             .AddDefaultTokenProviders()
             .AddDefaultUI();
@@ -46,7 +59,6 @@ public class Startup
             {
                 options.UseEntityFrameworkCore()
                        .UseDbContext<WrathLcIdentityDbContext>();
-
                 options.UseQuartz();
             })
 
@@ -86,12 +98,19 @@ public class Startup
                     Configuration.GetSection("Authentication:Discord");
                 options.ClientId = discordConfigSection["ClientId"];
                 options.ClientSecret = discordConfigSection["ClientSecret"];
+                options.SaveTokens = true;
+                options.Scope.Add("guilds");
             });
+        
+        services.AddHangfire(cfg => cfg.UseWrathLcConfiguration(Configuration.GetConnectionString("DefaultConnection")));
+        services.AddHangfireServer();
+        services.AddDiscord();
         services.AddHealthChecks();
+        services.AddWrathLcCore();
         services.AddOptions<OidcClientsConfiguration>()
             .Bind(Configuration)
             .ValidateDataAnnotations();
-        services.AddHostedService<ClientRegistrationWorker>();
+        services.AddHostedService<IdentitySeedWorker>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

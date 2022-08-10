@@ -1,0 +1,36 @@
+{
+  "executionRoleArn": "arn:aws:iam::602199015882:role/wrathlc-task-execution-role",
+  "containerDefinitions": [
+    {
+      "environmentFiles": [
+        {
+          "value": "arn:aws:s3:::wrathlc-env/dev.idp.aws.env",
+          "type": "s3"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/dev/wrathlc-idp",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "name": "wrathlc_idp"
+    }
+  ],
+  "memory": "512",
+  "family": "wrathlc-idp",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "cpu": "256"
+}

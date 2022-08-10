@@ -1,6 +1,6 @@
 resource "aws_security_group" "wrathlc_db" {
   name        = "wrathlc-db"
-  vpc_id      = aws_vpc.app_vpc.id
+  vpc_id      = module.vpc.vpc_id
   description = "Allow Postgres in from API"
 
   egress {
@@ -18,10 +18,13 @@ resource "aws_security_group" "wrathlc_db" {
   }
 }
 
+<<<<<<< HEAD
 resource "aws_db_subnet_group" "default" {
   name = "main"
   subnet_ids = [aws_subnet.database1a.id, aws_subnet.database1b.id]
 }
+=======
+>>>>>>> 8dd05d412b310702a66a2897b44fa0927a8ceb39
 resource "aws_db_instance" "wrathlc" {
   allocated_storage           = 20
   allow_major_version_upgrade = false
@@ -29,7 +32,7 @@ resource "aws_db_instance" "wrathlc" {
   auto_minor_version_upgrade  = true
   backup_retention_period     = 14
   backup_window               = "05:00-06:00"
-  db_subnet_group_name        = aws_db_subnet_group.default.name
+  db_subnet_group_name        = module.vpc.database_subnet_group
   delete_automated_backups    = true
   engine                      = "postgres"
   engine_version              = "14"

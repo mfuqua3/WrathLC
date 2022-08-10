@@ -14,6 +14,7 @@ terraform {
     region  = "us-east-1"
     profile = "tfuser"
   }
+<<<<<<< HEAD
 
   required_providers {
     aws = {
@@ -22,3 +23,6 @@ terraform {
     }
   }
 }
+=======
+}
+>>>>>>> 8dd05d412b310702a66a2897b44fa0927a8ceb39

@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrathLC.Api", "WrathLC.Api\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrathLC.Idp", "WrathLC.Idp\WrathLC.Idp.csproj", "{3AC0179B-CE91-43AA-8AC1-9D9FDC4E9D14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrathLC.Idp.Managers", "WrathLC.Idp.Managers\WrathLC.Idp.Managers.csproj", "{7F0C8116-CDB2-4F01-B83E-196CFEB745F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrathLC.Idp.Business", "WrathLC.Idp.Business\WrathLC.Idp.Business.csproj", "{7F0C8116-CDB2-4F01-B83E-196CFEB745F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrathLC.Core.Business", "WrathLC.Core.Business\WrathLC.Core.Business.csproj", "{1184C4B2-37D5-41EA-9FC6-32F50159E5FA}"
 EndProject
@@ -24,7 +24,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	docker-compose.yml = docker-compose.yml
+	LICENSE.md = LICENSE.md
+	README.md = README.md
 EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrathLC.HangfireWorker", "WrathLC.HangfireWorker\WrathLC.HangfireWorker.csproj", "{65DA28F5-E2A5-470E-AF32-61FFFC2DFD5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,5 +76,9 @@ Global
 		{880C3349-2277-4F68-9CD9-4D80A291F717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{880C3349-2277-4F68-9CD9-4D80A291F717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{880C3349-2277-4F68-9CD9-4D80A291F717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65DA28F5-E2A5-470E-AF32-61FFFC2DFD5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65DA28F5-E2A5-470E-AF32-61FFFC2DFD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65DA28F5-E2A5-470E-AF32-61FFFC2DFD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65DA28F5-E2A5-470E-AF32-61FFFC2DFD5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
