@@ -3,7 +3,9 @@ import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
 import {GuildDetail, GuildSummary, UserGuildSummary} from "../../models";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class GuildsAccessService implements GuildsAccess {
   private fakeGuildList: UserGuildSummary[] =  [
     {name: "Buzz", id: 1, active: true},

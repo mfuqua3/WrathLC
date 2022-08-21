@@ -1,16 +1,24 @@
 <mat-toolbar class="nav-bar">
   <mat-button-toggle-group class="nav-group">
     <app-navlink>
+      <a [routerLink]="['dashboard']" class="nostyle">
       Dashboard
+      </a>
     </app-navlink>
     <app-navlink *ngIf="activeGuild | async">
-      Loot Council
+      <a class="nostyle">
+        Loot Council
+      </a>
     </app-navlink>
-    <app-navlink *ngIf="activeGuild | async">
+    <app-navlink *ngIf="activeGuild | async" rou>
+      <a [routerLink]="['planning']" class="nostyle">
       Raid Planning
+      </a>
     </app-navlink>
     <app-navlink *ngIf="activeGuild | async">
-      Admin
+      <a class="nostyle">
+        Admin
+      </a>
     </app-navlink>
   </mat-button-toggle-group>
 </mat-toolbar>

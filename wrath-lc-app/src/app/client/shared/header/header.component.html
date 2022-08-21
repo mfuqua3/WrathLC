@@ -1,7 +1,7 @@
 <mat-toolbar class="header">
   <span class="header-item">Wrath LC</span>
   <span class="header-spacer"></span>
-  <mat-select class="header-item header-select" panelClass="header-panel">
+  <mat-select class="header-item header-select" [value]="(activeGuild | async)?.id" panelClass="header-panel">
     <ng-template ngFor let-guild [ngForOf]="guildList | async">
       <mat-option [value]="guild.id">{{guild.name}}</mat-option>
     </ng-template>
@@ -12,7 +12,7 @@
   </button>
 </mat-toolbar>
 <mat-menu #userMenu>
-  <button mat-menu-item>
+  <button mat-menu-item disabled>
     <span>My Wishlist</span>
   </button>
   <button mat-menu-item disabled>

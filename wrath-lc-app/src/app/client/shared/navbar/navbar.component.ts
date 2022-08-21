@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {GuildsContext} from "../../../core";
+import {GuildsContext, GuildsContextService} from "../../../core";
 import {Observable} from "rxjs";
 import {GuildDetail} from "../../../models";
 

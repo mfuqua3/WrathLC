@@ -22,7 +22,6 @@ import {CoreModule} from "./core";
     DataModule,
     CoreModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

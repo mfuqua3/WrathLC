@@ -11,6 +11,8 @@ import {MatSelectModule} from "@angular/material/select";
 import { MainLayoutComponent } from './main-layout.component';
 import {RouterModule} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
+import {GuildsContextService} from "../../core";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 
@@ -24,15 +26,16 @@ import {MatButtonModule} from "@angular/material/button";
   exports: [
     MainLayoutComponent
   ],
-    imports: [
-        CommonModule,
-        MatToolbarModule,
-        MatButtonToggleModule,
-        MatIconModule,
-        MatMenuModule,
-        MatSelectModule,
-        RouterModule,
-        MatButtonModule
-    ]
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSelectModule,
+    RouterModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
+  ]
 })
 export class SharedModule { }
