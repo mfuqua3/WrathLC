@@ -11,3 +11,4 @@ seq-data/
 %USERPROFILE%/
 .terraform/**/*
 *.aws.env
+.vs/
