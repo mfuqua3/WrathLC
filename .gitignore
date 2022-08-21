@@ -12,3 +12,4 @@ seq-data/
 .terraform/**/*
 *.aws.env
 .vs/
+.vscode/
