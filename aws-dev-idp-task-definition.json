@@ -2,12 +2,6 @@
   "executionRoleArn": "arn:aws:iam::602199015882:role/wrathlc-task-execution-role",
   "containerDefinitions": [
     {
-      "environmentFiles": [
-        {
-          "value": "arn:aws:s3:::wrathlc-env/dev.idp.aws.env",
-          "type": "s3"
-        }
-      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
