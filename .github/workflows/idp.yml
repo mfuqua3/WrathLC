@@ -100,7 +100,10 @@ jobs:
                 task-definition: ${{ env.ECS_TASK_DEFINITION }}
                 container-name: ${{ env.CONTAINER_NAME }}
                 image: ${{ steps.push-image.outputs.image }}
-                environment-variables: ${{ secrets.AWS_CONNECTION_STRING }}
+                environment-variables: |
+                    ${{ secrets.AWS_CONNECTION_STRING }}
+                    ${{ secrets.DISCORD_SECRET }}
+                    ${{ secrets.DEV_CLIENT_SECRET }}
         -
             name: Deploy Amazon ECS task definition
             uses: aws-actions/amazon-ecs-deploy-task-definition@v1
