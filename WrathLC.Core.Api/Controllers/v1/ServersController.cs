@@ -12,7 +12,13 @@ public class ServersController : ApiController
     {
         _tenancyManager = tenancyManager;
     }
+    /// <summary>
+    /// Fetches all discord servers from which the authenticated user may join/create a guild
+    /// </summary>
+    /// <returns>The requested servers, or an empty array if no eligible items exist</returns>
+    /// <response code="200">The eligible discord servers</response>
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<DiscordServerSummaryModel>>> GetAvailableGuildsAsync()
     {
         var result = await _tenancyManager.GetAvailableGuildsAsync(ForUser());

@@ -84,7 +84,7 @@ public class TenancyManager : ITenancyManager
         var alreadyJoined = await _dbContext.GuildUsers
             .AnyAsync(x => x.GuildId == request.GuildId && x.UserId == request.UserId);
         if (alreadyJoined)
-            throw new ResourceConflictException("User is already a member of that guild.");
+            throw new InvalidOperationException("User is already a member of that guild.");
         await _dbContext.GuildUsers.AddAsync(new GuildUser
         {
             GuildId = request.GuildId,
