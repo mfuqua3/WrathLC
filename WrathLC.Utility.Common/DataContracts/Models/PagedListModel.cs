@@ -1,4 +1,4 @@
-﻿namespace WrathLc.Common.Utilities.DataContracts.Models;
+﻿namespace WrathLC.Utility.Common.DataContracts.Models;
 
 public class PagedListModel<T>
 {

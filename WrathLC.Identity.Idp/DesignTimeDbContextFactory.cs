@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using WrathLC.Identity.Data;
 using WrathLc.Idp.ResourceAccess;
 
 namespace WrathLC.Identity.Idp;

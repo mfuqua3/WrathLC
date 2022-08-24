@@ -1,5 +1,8 @@
 ﻿using Hangfire;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using WrathLC.Core.Api.Extensions;
+using WrathLC.Core.Business.DependencyInjection;
 using WrathLc.Core.ResourceAccess;
 
 namespace WrathLC.Core.Api;
@@ -13,47 +16,45 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-       
+        services.AddOptions();
+        services
+            .AddOptions<JwtBearerOptions>()
+            .Bind(_configuration);
+        services.AddOptionsConfigurations();
         services.AddControllers();
         services.AddHealthChecks();
         services.AddSwaggerGen();
-        services.AddAuthentication();
+        services.AddApiVersioning();
+        services.AddVersionedApiExplorer();
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
         services.AddAuthorization();
         services.AddHangfireServer();
+        services.AddExceptionHandling();
+        services.AddCore(_configuration);
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WrathLcDbContext dbContext)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UseExceptionHandling();
         if (env.IsDevelopment())
         {
-            dbContext.Database.Migrate();
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-        app.UseCors(opt =>
-        {
-            opt.AllowAnyHeader()
-                .AllowAnyOrigin()
-                .AllowAnyMethod();
-        });
         app.UseRouting();
-
+        app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
-
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllers();
             endpoints.MapHealthChecks("/health");
+            endpoints.MapControllers();
             if (env.IsDevelopment())
             {
                 endpoints.MapHangfireDashboard();
-                endpoints.MapSwagger();
             }
-            
         });
     }
 }

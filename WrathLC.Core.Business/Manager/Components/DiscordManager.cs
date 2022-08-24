@@ -1,12 +1,12 @@
 ﻿using Discord;
 using Microsoft.EntityFrameworkCore;
-using WrathLc.Common.Utilities.Discord;
-using WrathLc.Core.Data.Requests;
-using WrathLc.Core.Managers.Manager.Contracts;
+using WrathLC.Core.Business.Manager.Contracts;
 using WrathLc.Core.ResourceAccess;
 using WrathLc.Core.ResourceAccess.Entities;
+using WrathLC.Core.Utility.DataContracts.Requests;
+using WrathLC.Utility.Common.Discord;
 
-namespace WrathLc.Core.Managers.Manager.Components;
+namespace WrathLC.Core.Business.Manager.Components;
 
 public class DiscordManager : IDiscordManager
 {
@@ -28,26 +28,26 @@ public class DiscordManager : IDiscordManager
             .Cast<IUserGuild>().ToList();
         var guildIds = guilds.Select(g => g.Id).ToList();
         var knownGuilds = await _dbContext.DiscordServers
-            .Where(x => guildIds.Contains(x.Id))
-            .Select(x => x.Id)
+            .Where(x => guildIds.Contains(x.ServerId))
+            .Select(x => x.ServerId)
             .ToListAsync();
         var toAdd = guilds.Where(x => !knownGuilds.Contains(x.Id));
         var servers = toAdd.Select(x => new DiscordServer
         {
-            Id = x.Id,
+            ServerId = x.Id,
             Name = x.Name
-        });
+        }).ToList();
         await _dbContext.AddRangeAsync(servers);
         var existingServerUsers = await _dbContext.DiscordServerUsers
-            .Where(x => x.UserId == request.UserId && guildIds.Contains(x.DiscordServerId))
-            .Select(x => x.DiscordServerId)
+            .Where(x => x.UserId == request.UserId && guildIds.Contains(x.DiscordServer.ServerId))
+            .Select(x => x.DiscordServer.ServerId)
             .ToListAsync();
         var toDeleteServerUsers = await _dbContext.DiscordServerUsers
-            .Where(x => x.UserId == request.UserId && !guildIds.Contains(x.DiscordServerId)).ToListAsync();
+            .Where(x => x.UserId == request.UserId && !guildIds.Contains(x.DiscordServer.ServerId)).ToListAsync();
         _dbContext.DiscordServerUsers.RemoveRange(toDeleteServerUsers);
         var toAddServerUsers = guildIds.Except(existingServerUsers).Select(x => new DiscordServerUser
         {
-            DiscordServerId = x,
+            DiscordServer = servers.Single(s=>s.ServerId == x),
             UserId = request.UserId
         });
         await _dbContext.AddRangeAsync(toAddServerUsers);

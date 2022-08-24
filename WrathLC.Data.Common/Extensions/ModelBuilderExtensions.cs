@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WrathLc.Common.Utilities.DataContracts.Interfaces;
+using WrathLC.Utility.Common.DataContracts.Interfaces;
 
-namespace WrathLc.Common.ResourceAccess;
+namespace WrathLC.Data.Common.Extensions;
 
 public static class ModelBuilderExtensions
 {
-
     public static void ApplySoftDeleteQueryFilters(this ModelBuilder builder)
     {
         foreach (var entityType in builder.Model.GetEntityTypes())
@@ -17,6 +16,7 @@ public static class ModelBuilderExtensions
 
         }
     }
+    
     public static void RestrictForeignKeyDelete(this ModelBuilder builder)
     {
         var foreignKeyRelationships = builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys());

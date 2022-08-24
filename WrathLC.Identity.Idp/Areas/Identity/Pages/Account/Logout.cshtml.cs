@@ -5,6 +5,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WrathLC.Identity.Data;
 using WrathLc.Idp.ResourceAccess;
 
 namespace WrathLC.Identity.Idp.Areas.Identity.Pages.Account

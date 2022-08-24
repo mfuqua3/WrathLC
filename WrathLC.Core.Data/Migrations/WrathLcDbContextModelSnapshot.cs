@@ -24,9 +24,11 @@ namespace WrathLc.Core.ResourceAccess.Migrations
 
             modelBuilder.Entity("WrathLc.Core.ResourceAccess.Entities.DiscordServer", b =>
                 {
-                    b.Property<decimal>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("numeric(20,0)");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -34,10 +36,16 @@ namespace WrathLc.Core.ResourceAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<decimal>("ServerId")
+                        .HasColumnType("numeric(20,0)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ServerId")
+                        .IsUnique();
 
                     b.ToTable("DiscordServers");
                 });
@@ -50,23 +58,23 @@ namespace WrathLc.Core.ResourceAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("boolean");
-
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<decimal>("DiscordServerId")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<int>("DiscordServerId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Deleted");
-
                     b.HasIndex("DiscordServerId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("UserId");
 
@@ -86,14 +94,14 @@ namespace WrathLc.Core.ResourceAccess.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("boolean");
-
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<decimal>("DiscordServerId")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<int>("DiscordServerId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -103,9 +111,10 @@ namespace WrathLc.Core.ResourceAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Deleted");
+                    b.HasIndex("DiscordServerId")
+                        .IsUnique();
 
-                    b.HasIndex("DiscordServerId");
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Guilds");
                 });
@@ -121,11 +130,14 @@ namespace WrathLc.Core.ResourceAccess.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("boolean");
-
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("GuildId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -138,7 +150,9 @@ namespace WrathLc.Core.ResourceAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Deleted");
+                    b.HasIndex("GuildId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("UserId");
 
@@ -149,17 +163,8 @@ namespace WrathLc.Core.ResourceAccess.Migrations
 
             modelBuilder.Entity("WrathLc.Core.ResourceAccess.Entities.DiscordServerUser", b =>
                 {
-                    b.HasOne("WrathLc.Core.ResourceAccess.Entities.DiscordServer", null)
-                        .WithMany("Users")
-                        .HasForeignKey("DiscordServerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WrathLc.Core.ResourceAccess.Entities.Guild", b =>
-                {
                     b.HasOne("WrathLc.Core.ResourceAccess.Entities.DiscordServer", "DiscordServer")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("DiscordServerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -167,9 +172,38 @@ namespace WrathLc.Core.ResourceAccess.Migrations
                     b.Navigation("DiscordServer");
                 });
 
+            modelBuilder.Entity("WrathLc.Core.ResourceAccess.Entities.Guild", b =>
+                {
+                    b.HasOne("WrathLc.Core.ResourceAccess.Entities.DiscordServer", "DiscordServer")
+                        .WithOne("Guild")
+                        .HasForeignKey("WrathLc.Core.ResourceAccess.Entities.Guild", "DiscordServerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("DiscordServer");
+                });
+
+            modelBuilder.Entity("WrathLc.Core.ResourceAccess.Entities.GuildUser", b =>
+                {
+                    b.HasOne("WrathLc.Core.ResourceAccess.Entities.Guild", "Guild")
+                        .WithMany("GuildUsers")
+                        .HasForeignKey("GuildId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Guild");
+                });
+
             modelBuilder.Entity("WrathLc.Core.ResourceAccess.Entities.DiscordServer", b =>
                 {
+                    b.Navigation("Guild");
+
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("WrathLc.Core.ResourceAccess.Entities.Guild", b =>
+                {
+                    b.Navigation("GuildUsers");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using WrathLc.Common.Utilities.DataContracts.Models;
+using WrathLC.Utility.Common.DataContracts.Models;
 
 namespace WrathLC.Core.Api.Options;
 

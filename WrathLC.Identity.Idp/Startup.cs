@@ -4,7 +4,7 @@ using Quartz;
 using Serilog;
 using WrathLC.Identity.Business.DependencyInjection;
 using WrathLC.Identity.Idp.Extensions;
-using WrathLc.Idp.Data;
+using WrathLC.Identity.Utility;
 
 namespace WrathLC.Identity.Idp;
 
@@ -32,7 +32,16 @@ public class Startup
             .AddValidation(OpenIddictConfigurationExtensions.ConfigureValidation);
         services
             .AddAuthentication()
-            .AddDiscord();
+            .AddDiscord(options =>
+            {
+                var discordConfigSection =
+                    _configuration.GetSection("Authentication:Discord");
+        
+                options.ClientId = discordConfigSection["ClientId"];
+                options.ClientSecret = discordConfigSection["ClientSecret"];
+                options.SaveTokens = true;
+                options.Scope.Add("guilds");
+            });
         services.AddIdentity(_configuration, identity =>
         {
             identity.AddDefaultUI();
@@ -42,7 +51,6 @@ public class Startup
         services.AddOptions<OidcClientsConfiguration>()
             .Bind(_configuration)
             .ValidateDataAnnotations();
-        services.AddOptionsConfigurations();
         services.AddHostedService<IdentitySeedWorker>();
     }
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WrathLc.Common.Utilities.DataContracts.Interfaces;
+using WrathLC.Utility.Common.DataContracts.Interfaces;
 
-namespace WrathLc.Common.ResourceAccess;
+namespace WrathLC.Data.Common.Extensions;
 
 public static class DbContextExtensions
 {
@@ -46,5 +46,5 @@ public static class DbContextExtensions
         {
             dbContext.ChangeTracker.AutoDetectChangesEnabled = autoDetectChangesEnabled;
         }
-    }
+    } 
 }

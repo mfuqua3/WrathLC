@@ -3,12 +3,13 @@ using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WrathLc.Common.Utilities.Hangfire;
-using WrathLc.Core.Managers.Manager.Components;
-using WrathLc.Core.Managers.Manager.Contracts;
+using WrathLC.Core.Business.Manager.Components;
+using WrathLC.Core.Business.Manager.Contracts;
 using WrathLc.Core.ResourceAccess;
+using WrathLC.Utility.Common.Discord;
+using WrathLC.Utility.Common.Hangfire;
 
-namespace WrathLc.Core.Managers.DependencyInjection;
+namespace WrathLC.Core.Business.DependencyInjection;
 
 public static class CoreRegistrar
 {
@@ -18,8 +19,10 @@ public static class CoreRegistrar
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<WrathLcDbContext>(opt => { opt.UseNpgsql(connectionString); });
         services.AddHangfire(cfg => cfg.UseWrathLcConfiguration(connectionString));
-        
-        services.AddScoped<IDiscordManager, DiscordManager>();
+        services.AddDiscord();
+        services
+            .AddScoped<IDiscordManager, DiscordManager>()
+            .AddScoped<ITenancyManager, TenancyManager>();
         return services;
     }
 }

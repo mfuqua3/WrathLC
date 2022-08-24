@@ -1,39 +1,35 @@
 import {GuildsAccess} from "../contracts";
-import {Injectable} from "@angular/core";
-import {Observable, of} from "rxjs";
-import {GuildDetail, GuildSummary, UserGuildSummary} from "../../models";
+import {Inject, Injectable} from "@angular/core";
+import {flatMap, Observable, switchMap, tap} from "rxjs";
+import {CreateGuildRequest, GuildDetail, GuildSummary} from "../../models";
+import {HttpClient} from "@angular/common/http";
+import {API_URL} from "../data.module";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuildsAccessService implements GuildsAccess {
-  private fakeGuildList: UserGuildSummary[] =  [
-    {name: "Buzz", id: 1, active: true},
-    {name: "Banana Shaped Gamers", id: 2, active: false},
-    {name: "God and Anime", id: 3, active: false}
-  ];
+  private activeGuildKey = "guild-id";
 
-  constructor() {
+  constructor(private readonly http: HttpClient, @Inject(API_URL) private readonly apiUrl: string) {
   }
 
-  getGuildList(): Observable<UserGuildSummary[]> {
-    return of(this.fakeGuildList);
+  getGuildList(): Observable<GuildSummary[]> {
+    return this.http.get<GuildSummary[]>(`${this.apiUrl}/guilds`)
   }
 
   selectGuild(guildId: number): Observable<GuildDetail> {
-    const guild = this.fakeGuildList.find(x=>x.id === guildId);
-    if(!guild){
-      throw Error("Bad ID");
-    }
-    guild.active = true;
-    return of(guild);
+    return this.getGuild(guildId).pipe(tap(() =>
+      localStorage.setItem(this.activeGuildKey, guildId.toString())));
   }
 
   getGuild(guildId: number): Observable<GuildDetail> {
-    const guild = this.fakeGuildList.find(x=>x.id === guildId);
-    if(!guild){
-      throw Error("Bad ID");
-    }
-    return of(guild);
+    return this.http.get<GuildDetail>(`${this.apiUrl}/guilds/${guildId}`);
   }
+
+  // createGuild(request: CreateGuildRequest): Observable<GuildDetail>{
+  //   return this.http.post(`${this.apiUrl}/guilds`,request).pipe(switchMap((resp)=>{
+  //     return this.http.get<GuildDetail>(resp.)
+  //   }))
+  // }
 }

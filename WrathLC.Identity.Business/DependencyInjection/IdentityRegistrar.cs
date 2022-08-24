@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WrathLc.Common.Utilities.Discord;
-using WrathLc.Common.Utilities.Hangfire;
+using WrathLC.Identity.Data;
 using WrathLc.Idp.ResourceAccess;
+using WrathLC.Utility.Common.Discord;
+using WrathLC.Utility.Common.Hangfire;
 
 namespace WrathLC.Identity.Business.DependencyInjection;
 

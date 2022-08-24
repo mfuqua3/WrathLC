@@ -1,4 +1,4 @@
-﻿namespace WrathLc.Common.Utilities.DataContracts.Interfaces;
+﻿namespace WrathLC.Utility.Common.DataContracts.Interfaces;
 
 public interface IUpdated
 {

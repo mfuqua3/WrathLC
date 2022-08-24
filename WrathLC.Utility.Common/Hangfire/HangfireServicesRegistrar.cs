@@ -1,7 +1,7 @@
 ﻿using Hangfire;
 using Hangfire.PostgreSql;
 
-namespace WrathLc.Common.Utilities.Hangfire;
+namespace WrathLC.Utility.Common.Hangfire;
 
 public static class HangfireServicesRegistrar
 {

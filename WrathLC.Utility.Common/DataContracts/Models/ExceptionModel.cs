@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace WrathLc.Common.Utilities.DataContracts.Models;
+namespace WrathLC.Utility.Common.DataContracts.Models;
 
 public class ExceptionModel
 {

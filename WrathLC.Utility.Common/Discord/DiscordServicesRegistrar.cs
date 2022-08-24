@@ -2,7 +2,7 @@
 using Discord.Rest;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WrathLc.Common.Utilities.Discord;
+namespace WrathLC.Utility.Common.Discord;
 
 public static class DiscordServicesRegistrar
 {

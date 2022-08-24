@@ -1,5 +1,6 @@
 ﻿using System;
-using WrathLc.Common.Utilities.DataContracts.Interfaces;
+using System.Collections.Generic;
+using WrathLC.Utility.Common.DataContracts.Interfaces;
 
 namespace WrathLc.Core.ResourceAccess.Entities;
 
@@ -11,6 +12,7 @@ public class Guild : IUnique<int>, ICreated, IUpdated, INamed, ISoftDelete
     public string Name { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime? DeletedAt { get; set; }
-    public ulong DiscordServerId { get; set; }
+    public int DiscordServerId { get; set; }
     public DiscordServer DiscordServer { get; set; }
+    public List<GuildUser> GuildUsers { get; set; }
 }

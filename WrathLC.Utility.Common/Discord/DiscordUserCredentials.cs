@@ -1,4 +1,4 @@
-﻿namespace WrathLc.Common.Utilities.Discord;
+﻿namespace WrathLC.Utility.Common.Discord;
 
 public class DiscordUserCredentials
 {

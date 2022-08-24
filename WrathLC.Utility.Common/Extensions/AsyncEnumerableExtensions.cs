@@ -1,4 +1,4 @@
-﻿namespace WrathLc.Common.Utilities.Extensions;
+﻿namespace WrathLC.Utility.Common.Extensions;
 
 public static class AsyncEnumerableExtensions
 {

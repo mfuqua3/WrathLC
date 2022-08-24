@@ -1,7 +1,7 @@
 ﻿using Discord;
 using Discord.Rest;
 
-namespace WrathLc.Common.Utilities.Discord;
+namespace WrathLC.Utility.Common.Discord;
 
 internal class DiscordClientFactory : IDiscordClientFactory
 {

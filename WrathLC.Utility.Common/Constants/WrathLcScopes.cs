@@ -1,4 +1,4 @@
-﻿namespace WrathLc.Common.Utilities.Constants;
+﻿namespace WrathLC.Utility.Common.Constants;
 
 public static class GuildViewScopes
 {

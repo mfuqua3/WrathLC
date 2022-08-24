@@ -1,10 +1,10 @@
 import {Observable} from "rxjs";
-import {GuildDetail, UserGuildSummary} from "../../models";
+import {GuildDetail, GuildSummary} from "../../models";
 
 export interface GuildsContext {
   contextReady: Observable<boolean>;
   activeGuild: Observable<GuildDetail | null>;
-  guildList: Observable<UserGuildSummary[]>;
+  guildList: Observable<GuildSummary[]>;
 
   selectGuild(guildId: number): Observable<GuildDetail>;
 }

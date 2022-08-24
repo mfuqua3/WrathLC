@@ -1,4 +1,5 @@
 ﻿using OpenIddict.Abstractions;
+using WrathLC.Identity.Data;
 using WrathLc.Idp.ResourceAccess;
 
 namespace WrathLC.Identity.Idp.Extensions;

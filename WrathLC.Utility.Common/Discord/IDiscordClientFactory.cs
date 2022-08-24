@@ -1,6 +1,6 @@
 ﻿using Discord.Rest;
 
-namespace WrathLc.Common.Utilities.Discord;
+namespace WrathLC.Utility.Common.Discord;
 
 public interface IDiscordClientFactory
 {

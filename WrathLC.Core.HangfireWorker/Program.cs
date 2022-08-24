@@ -1,5 +1,5 @@
 using Hangfire;
-using WrathLc.Common.Utilities.Hangfire;
+using WrathLC.Utility.Common.Hangfire;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>

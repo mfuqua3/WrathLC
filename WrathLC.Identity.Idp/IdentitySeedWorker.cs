@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using OpenIddict.Abstractions;
-using WrathLc.Common.Utilities.Constants;
-using WrathLc.Common.Utilities.Extensions;
-using WrathLc.Idp.Data;
+using WrathLC.Identity.Data;
+using WrathLC.Identity.Utility;
 using WrathLc.Idp.ResourceAccess;
+using WrathLC.Utility.Common.Constants;
+using WrathLC.Utility.Common.Extensions;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace WrathLC.Identity.Idp;

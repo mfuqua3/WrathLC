@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
-using WrathLc.Common.Utilities.Extensions;
+using WrathLC.Identity.Data;
 using WrathLC.Identity.Idp.Attributes;
 using WrathLC.Identity.Idp.Extensions;
 using WrathLC.Identity.Idp.ViewModels.Authorization;
 using WrathLc.Idp.ResourceAccess;
+using WrathLC.Utility.Common.Extensions;
 
 namespace WrathLC.Identity.Idp.Controllers;
 

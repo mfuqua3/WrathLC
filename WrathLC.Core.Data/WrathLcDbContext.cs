@@ -2,8 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using WrathLc.Common.ResourceAccess;
 using WrathLc.Core.ResourceAccess.Entities;
+using WrathLC.Data.Common;
+using WrathLC.Data.Common.Extensions;
 
 namespace WrathLc.Core.ResourceAccess;
 

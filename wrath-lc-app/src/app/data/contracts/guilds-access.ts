@@ -1,8 +1,8 @@
 import {Observable} from "rxjs";
-import {GuildDetail, UserGuildSummary} from "../../models";
+import {GuildDetail, GuildSummary} from "../../models";
 
 export interface GuildsAccess {
-  getGuildList(): Observable<UserGuildSummary[]>
+  getGuildList(): Observable<GuildSummary[]>
   selectGuild(guildId: number): Observable<GuildDetail>
   getGuild(guildId: number): Observable<GuildDetail>
 }

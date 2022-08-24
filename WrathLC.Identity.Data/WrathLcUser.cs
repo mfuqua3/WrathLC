@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace WrathLc.Idp.ResourceAccess;
+namespace WrathLC.Identity.Data;
 
 public class WrathLcUser : IdentityUser
 {

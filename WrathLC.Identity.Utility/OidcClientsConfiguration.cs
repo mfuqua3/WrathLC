@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace WrathLc.Idp.Data;
+namespace WrathLC.Identity.Utility;
 
 [UsedImplicitly]
 public class OidcClientsConfiguration

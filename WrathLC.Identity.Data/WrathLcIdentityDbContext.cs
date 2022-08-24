@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WrathLc.Common.ResourceAccess;
+using WrathLC.Data.Common;
+using WrathLC.Data.Common.Extensions;
 
-namespace WrathLc.Idp.ResourceAccess;
+namespace WrathLC.Identity.Data;
 
 public class WrathLcIdentityDbContext : IdentityDbContext<WrathLcUser>
 {

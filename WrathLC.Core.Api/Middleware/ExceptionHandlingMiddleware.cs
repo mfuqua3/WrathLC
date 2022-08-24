@@ -1,7 +1,8 @@
 ﻿using System.Net;
 using System.Security.Authentication;
 using System.Text.Json;
-using WrathLc.Common.Utilities.DataContracts.Models;
+using WrathLC.Core.Utility.Exceptions;
+using WrathLC.Utility.Common.DataContracts.Models;
 
 namespace WrathLC.Core.Api.Middleware;
 
@@ -62,6 +63,10 @@ public class ExceptionHandlingMiddleware : IMiddleware
                 break;
             case ServerIsTeapotException:
                 code = 418;
+                message = ex.Message;
+                break;
+            case ResourceConflictException:
+                code = (int)HttpStatusCode.Conflict;
                 message = ex.Message;
                 break;
             case NotImplementedException:

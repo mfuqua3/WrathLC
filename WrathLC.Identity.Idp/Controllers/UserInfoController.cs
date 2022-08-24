@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using OpenIddict.Validation.AspNetCore;
+using WrathLC.Identity.Data;
 using WrathLc.Idp.ResourceAccess;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 

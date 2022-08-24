@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using JetBrains.Annotations;
 
-namespace WrathLc.Idp.Data;
+namespace WrathLC.Identity.Utility;
 
 [UsedImplicitly]
 public class OidcClientApplication
