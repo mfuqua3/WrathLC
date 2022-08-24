@@ -13,3 +13,4 @@ seq-data/
 *.aws.env
 .vs/
 .vscode/
+Infra/dev/.terraform/providers/
