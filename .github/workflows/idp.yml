@@ -28,7 +28,7 @@ jobs:
             uses: docker/build-push-action@v3
             with:
                 context: .
-                file: ./WrathLC.Idp/Dockerfile
+                file: ./WrathLC.Identity.Idp/Dockerfile
                 tags: wrathlc_idp:latest
                 outputs: type=docker,dest=/tmp/wrathlc_idp.tar
                 build-args: |
