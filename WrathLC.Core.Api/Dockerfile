@@ -8,7 +8,7 @@ ARG CONFIGURATION
 WORKDIR /src
 COPY ["WrathLC.Core.Api/WrathLC.Core.Api.csproj", "WrathLC.Core.Api/"]
 COPY ["WrathLC.Core.Data/WrathLC.Core.Data.csproj", "WrathLC.Core.Data/"]
-COPY ["WrathLC.Core.Utility/WrathLC.Core.Data.csproj", "WrathLC.Core.Utility/"]
+COPY ["WrathLC.Core.Utility/WrathLC.Core.Utility.csproj", "WrathLC.Core.Utility/"]
 COPY ["WrathLC.Core.Business/WrathLC.Core.Business.csproj", "WrathLC.Core.Business/"]
 COPY ["WrathLC.Data.Common/WrathLC.Data.Common.csproj", "WrathLC.Data.Common/"]
 COPY ["WrathLC.Utility.Common/WrathLC.Utility.Common.csproj", "WrathLC.Utility.Common/"]
