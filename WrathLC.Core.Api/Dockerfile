@@ -14,7 +14,7 @@ COPY ["WrathLC.Data.Common/WrathLC.Data.Common.csproj", "WrathLC.Data.Common/"]
 COPY ["WrathLC.Utility.Common/WrathLC.Utility.Common.csproj", "WrathLC.Utility.Common/"]
 RUN dotnet restore "WrathLC.Core.Api/WrathLC.Core.Api.csproj"
 COPY . .
-WORKDIR "/src/WrathLC.Api"
+WORKDIR "/src/WrathLC.Core.Api"
 RUN dotnet build "WrathLC.Core.Api.csproj" -c $CONFIGURATION -o /app/build
 
 FROM build AS publish
