@@ -1,8 +1,8 @@
 ﻿using Discord;
-using Discord.Rest;
 using Microsoft.EntityFrameworkCore;
 using WrathLc.Common.Utilities.Discord;
 using WrathLc.Core.Data.Requests;
+using WrathLc.Core.Managers.Manager.Contracts;
 using WrathLc.Core.ResourceAccess;
 using WrathLc.Core.ResourceAccess.Entities;
 

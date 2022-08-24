@@ -1,6 +1,6 @@
 ﻿using WrathLc.Core.Data.Requests;
 
-namespace WrathLc.Core.Managers.Manager.Components;
+namespace WrathLc.Core.Managers.Manager.Contracts;
 
 public interface IDiscordManager
 {
