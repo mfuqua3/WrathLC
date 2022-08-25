@@ -6,9 +6,9 @@ export const defaultTheme = createTheme({
             default: "#ffffff",
         },
         primary: {
-            main: "#3F51B5",
-            light: "#C5CAE9",
-            dark: "#303F9F",
+            main: "#001970",
+            light: "#303f9f",
+            dark: "#020223",
             contrastText: "#FFFFFF",
         },
         secondary: {
@@ -20,7 +20,7 @@ export const defaultTheme = createTheme({
     },
     typography: {
         fontSize: 12,
-        fontFamily: "Arial",
+        fontFamily: "Helvetica",
         body1: {
             fontWeight: 300,
             fontSize: "14px",

@@ -13,16 +13,12 @@ function TopNavLg() {
     const navigate = useNavigate();
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="relative">
                 <Toolbar>
                     <Stack direction={"row"} spacing={5}>
-                        <TopNavMenuItem title={""} icon={<HomeIcon/>} onClick={() => navigate("/")}/>
-                        <Button color={"secondary"} onClick={() => navigate("area1")}>
-                            Area1
-                        </Button>
-                        <Button color={"secondary"} onClick={() => navigate("area2")}>
-                            Area2
-                        </Button>
+                        <TopNavMenuItem color={"primary.contrastText"} title={"Wrath LC"}  onClick={() => navigate("/")}/>
+                        <TopNavMenuItem color={"primary.contrastText"} title={"Area 1"}   onClick={() => navigate("area1")}/>
+                        <TopNavMenuItem color={"primary.contrastText"} title={"Area 2"}  onClick={() => navigate("area2")}/>
                     </Stack>
                     <Box display={"flex"} flexDirection={"row"} justifyContent={"end"} width={"100%"}>
                         <TopNavUserMenu />

@@ -8,7 +8,7 @@ export interface ResponsiveContainerProps {
 
 function ResponsiveContainer({ lower, upper }: ResponsiveContainerProps) {
     const theme = useTheme();
-    const useUpper = useMediaQuery(theme.breakpoints.up("md"));
+    const useUpper = useMediaQuery(theme.breakpoints.up("sm"));
     return (
         <>
             {useUpper && upper}

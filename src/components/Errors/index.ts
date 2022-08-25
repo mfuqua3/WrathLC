@@ -4,3 +4,4 @@
 
 export * from "./AccessDenied";
 export * from "./Error";
+export * from "./NotFound";

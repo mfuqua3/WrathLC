@@ -11,6 +11,7 @@ import AdapterMoment from "@date-io/moment";
 import {SnackbarProvider} from "./utils/snackbar";
 import ModalProvider from "./utils/modal/ModalProvider";
 import {LocalizationProvider} from "@mui/x-date-pickers";
+import DrawerProvider from "./utils/drawer/DrawerProvider";
 
 const baseUrl = document.getElementsByTagName("base")[0].getAttribute("href");
 const rootElement = document.getElementById("root");
@@ -24,7 +25,9 @@ root.render(
                 <BrowserRouter basename={baseUrl ?? undefined}>
                     <SnackbarProvider>
                         <ModalProvider>
-                            <App/>
+                            <DrawerProvider>
+                                <App/>
+                            </DrawerProvider>
                         </ModalProvider>
                     </SnackbarProvider>
                 </BrowserRouter>

@@ -1,0 +1,39 @@
+import React from "react";
+import {DrawerConsumer} from "./DrawerConsumer";
+import {Box, Divider, Drawer} from "@mui/material";
+
+const container = window !== undefined ? () => window.document.body : undefined;
+const drawerWidth = 240;
+function DrawerRoot() {
+    return (
+        <DrawerConsumer>{(state) =>
+            state && (
+                <Drawer
+                    container={container}
+                    variant={"temporary"}
+                    open={state.isOpen}
+                    onClose={state.close}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
+                    sx={{
+                        display: {xs: 'block', sm: 'none'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                    }}>
+                    <Box onClick={() => {
+                        if (state?.isOpen) {
+                            state.close()
+                        }
+                    }} sx={{textAlign: 'center'}}>
+                        {state.header}
+                        <Divider/>
+                        {state.content}
+                    </Box>
+                </Drawer>
+            )
+        }
+        </DrawerConsumer>
+    )
+}
+
+export default React.memo(DrawerRoot);
