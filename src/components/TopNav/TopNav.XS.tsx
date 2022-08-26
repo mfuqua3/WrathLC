@@ -1,23 +1,38 @@
-import React from "react";
-import {AppBar, Grid, Stack, Toolbar} from "@mui/material";
+import React, {useState} from "react";
+import {AppBar, Grid, IconButton, Stack, Toolbar} from "@mui/material";
 import "./TopNav.css";
-import TopNavPopupMenu from "./TopNav.PopupMenu";
 import TopNavUserMenu from "./TopNav.UserMenu";
 import {useNavigate} from "react-router-dom";
 import {TopNavMenuItem} from "./TopNav.MenuItem";
 import HomeIcon from '@mui/icons-material/Home';
 import {useAuth} from "../../utils/auth";
-import LoginIcon from "@mui/icons-material/Login";
+import NavigationDrawer from "../NavigationDrawer/NavigationDrawer";
+import {NavigationDrawerListItem} from "../NavigationDrawer";
+import MenuIcon from "@mui/icons-material/Menu";
 
 function TopNavXS() {
     const navigate = useNavigate();
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const drawerItems: NavigationDrawerListItem[] = [
+        {text: "Area1", onClick: () => navigate("area1")},
+        {text: "Area2", onClick: () => navigate("area2")}
+    ]
     const {loading, isAuthenticated, userManager: {signinRedirect}} = useAuth();
     return (
         <AppBar position="relative">
             <Toolbar variant={"dense"}>
                 <Grid container justifyContent={"space-between"} alignContent={"stretch"} alignItems={"center"}>
                     <Grid item>
-                        <TopNavPopupMenu edge={"start"}/>
+                        <IconButton
+                            edge={"start"}
+                            color={"inherit"}
+                            aria-label={"menu"}
+                            onClick={(e) => {
+                                setDrawerOpen(true);
+                            }}
+                        >
+                            <MenuIcon className={"menu-icon"}/>
+                        </IconButton>
                     </Grid>
                     <Grid item>
                         <Stack direction={"row"}>
@@ -25,11 +40,14 @@ function TopNavXS() {
                                             color={"primary.contrastText"}/>
                             {
                                 isAuthenticated ? <TopNavUserMenu/> :
-                                    <TopNavMenuItem title={"Sign In"} onClick={signinRedirect} color={"primary.contrastText"}/>
+                                    <TopNavMenuItem title={"Sign In"} onClick={signinRedirect}
+                                                    color={"primary.contrastText"}/>
                             }
                         </Stack>
                     </Grid>
                 </Grid>
+                <NavigationDrawer header={"WrathLC"} items={drawerItems} open={drawerOpen}
+                                  onClose={() => setDrawerOpen(false)}/>
             </Toolbar>
         </AppBar>
     );

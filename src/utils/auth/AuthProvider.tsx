@@ -42,7 +42,10 @@ function AuthProvider({ children, ...userManagerSettings }: UserManagerSettings 
         const loadedUser = await userManager.getUser();
         setUser(loadedUser);
     }
+    function signin(){
+        userManager.signinRedirect();
 
+    }
     // function handleUserSignedIn() {
     //     setIsAuthenticated(true);
     // }

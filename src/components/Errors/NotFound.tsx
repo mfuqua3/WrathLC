@@ -19,7 +19,7 @@ function NotFound() {
                 Not Found
             </Typography>
             <Typography variant={"h5"} marginTop={3} maxWidth={"70%"} align={"center"}>
-                The page your are looking for does not exist.
+                The page you are looking for does not exist.
             </Typography>
             <Button variant={"contained"} onClick={() => navigate("/")}>
                 Return Home
