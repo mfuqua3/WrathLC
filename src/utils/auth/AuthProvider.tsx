@@ -66,7 +66,7 @@ function AuthProvider({ children, ...userManagerSettings }: UserManagerSettings 
     return (
         <AuthContext.Provider value={state}>
             <AxiosConfig />
-            <SilentRefresh />
+            {/*<SilentRefresh />*/}
             {children}
         </AuthContext.Provider>
     );

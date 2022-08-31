@@ -2,15 +2,15 @@ import { useSnackbar } from "../snackbar";
 import { isAxiosError } from "../guards/isAxiosError";
 import { isApiError } from "../guards/isApiError";
 
-export interface ProvidedErrorMessagingMethods {
-    invoke: <T>(p: Promise<T>, success?: string) => Promise<T>;
+export interface ProvidedErrorMessagingMethods<T> {
+    invoke: <R>(action: (api: T) => Promise<R>, success?: string) => Promise<R>;
 }
 
-export const useApi = (): ProvidedErrorMessagingMethods => {
+export function useApi<T>(api: T): ProvidedErrorMessagingMethods<T> {
     const showMessage = useSnackbar();
-    const invoke = <T>(promise: Promise<T>, success?: string) => {
-        return promise
-            .then((result: T) => {
+    const invoke = <R>(action: (api: T) => Promise<R>, success?: string) => {
+        return action(api)
+            .then((result: R) => {
                 if (success !== null && success !== undefined) {
                     showMessage({
                         position: "BottomCenter",
@@ -41,4 +41,4 @@ export const useApi = (): ProvidedErrorMessagingMethods => {
     };
 
     return { invoke };
-};
+}
