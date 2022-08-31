@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WrathLC.Core.Business.Manager.Contracts;
 using WrathLC.Core.Utility.DataContracts.Models;
 

@@ -1,6 +1,7 @@
 ﻿using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WrathLC.Core.Api.Extensions;
 using WrathLC.Core.Business.DependencyInjection;
 using WrathLc.Core.ResourceAccess;
@@ -17,16 +18,24 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddOptions();
-        services
-            .AddOptions<JwtBearerOptions>()
-            .Bind(_configuration);
+        var jwtBearerOptions = _configuration
+            .GetSection("JwtBearer")
+            .Get<JwtBearerOptions>();
         services.AddOptionsConfigurations();
         services.AddControllers();
         services.AddHealthChecks();
         services.AddSwaggerGen();
         services.AddApiVersioning();
         services.AddVersionedApiExplorer();
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>
+            {
+                opt.Authority = jwtBearerOptions.Authority;
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false
+                };
+            });
         services.AddAuthorization();
         services.AddHangfireServer();
         services.AddExceptionHandling();
@@ -41,10 +50,17 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseCors();
+        app.UseCors(opt =>
+        {
+            opt
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
