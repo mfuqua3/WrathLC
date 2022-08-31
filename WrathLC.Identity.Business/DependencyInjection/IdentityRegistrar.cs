@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WrathLC.Core.Business.Manager.Components;
+using WrathLC.Core.Business.Manager.Contracts;
 using WrathLC.Identity.Data;
 using WrathLc.Idp.ResourceAccess;
 using WrathLC.Utility.Common.Discord;

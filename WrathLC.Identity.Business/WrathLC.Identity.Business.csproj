@@ -22,6 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\WrathLC.Core.Business\WrathLC.Core.Business.csproj" />
       <ProjectReference Include="..\WrathLC.Identity.Data\WrathLC.Identity.Data.csproj" />
       <ProjectReference Include="..\WrathLC.Utility.Common\WrathLC.Utility.Common.csproj" />
     </ItemGroup>
