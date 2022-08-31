@@ -80,7 +80,7 @@ public class UserinfoController : Controller
 
         if (User.HasScope(Scopes.Profile))
         {
-            claims[Claims.Username] = await _userManager.GetUserNameAsync(user);
+            claims[Claims.Name] = await _userManager.GetUserNameAsync(user);
         }
 
         // Note: the complete list of standard claims supported by the OpenID Connect specification

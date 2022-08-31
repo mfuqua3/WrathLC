@@ -48,13 +48,12 @@ public class IdentitySeedWorker : BackgroundService
                     Permissions.GrantTypes.AuthorizationCode,
                     Permissions.GrantTypes.RefreshToken,
                     Permissions.ResponseTypes.Code,
-                    Permissions.Scopes.Email,
                     Permissions.Scopes.Profile,
-                    Permissions.Scopes.Roles
+                    Permissions.Scopes.Roles,
+                    WrathLcPermissions.Api
                 },
                 Requirements = { Requirements.Features.ProofKeyForCodeExchange }
             };
-            clientDescriptor.Permissions.AddRange(GuildViewScopes.AllScopes);
             clientDescriptor.RedirectUris.AddRange(client.RedirectUris.Select(x => new Uri(x)));
 
             var existing = await manager.FindByClientIdAsync(client.ClientId, stoppingToken);

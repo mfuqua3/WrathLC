@@ -1,6 +1,7 @@
 ﻿using OpenIddict.Abstractions;
 using WrathLC.Identity.Data;
-using WrathLc.Idp.ResourceAccess;
+using WrathLC.Utility.Common.Constants;
+using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace WrathLC.Identity.Idp.Extensions;
 
@@ -16,13 +17,14 @@ public static class OpenIddictConfigurationExtensions
             .SetUserinfoEndpointUris("/connect/userinfo");
 
         serverBuilder.RegisterScopes(
-            OpenIddictConstants.Permissions.Scopes.Email, 
-            OpenIddictConstants.Permissions.Scopes.Profile, 
-            OpenIddictConstants.Permissions.Scopes.Roles);
+            Scopes.Profile, 
+            Scopes.Roles,
+            WrathLcScopes.Api);
 
         serverBuilder.AllowAuthorizationCodeFlow();
 
-        serverBuilder.AddDevelopmentEncryptionCertificate()
+        serverBuilder
+            .AddDevelopmentEncryptionCertificate()
             .AddDevelopmentSigningCertificate();
         serverBuilder.UseAspNetCore()
             .EnableAuthorizationEndpointPassthrough()

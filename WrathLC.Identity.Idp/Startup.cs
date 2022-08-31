@@ -46,7 +46,6 @@ public class Startup
         {
             identity.AddDefaultUI();
         });
-        services.AddHangfireServer();
         services.AddHealthChecks();
         services.AddOptions<OidcClientsConfiguration>()
             .Bind(_configuration)
