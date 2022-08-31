@@ -6,7 +6,7 @@ import AppRoutes from "./App.Routes";
 function App() {
     const oidcEnvironmentConfig = useOidcEnvironmentConfiguration();
     return (
-        <AuthProvider {...oidcEnvironmentConfig}>
+        <AuthProvider {...oidcEnvironmentConfig} scope={"openid profile api"} loadUserInfo>
             <AppRoutes />
         </AuthProvider>
     );

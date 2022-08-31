@@ -10,7 +10,7 @@ function AppRoutes() {
     return (
         <Routes>
             <Route element={<MainLayout/>}>
-                <Route path={"signin-oidc"} element={<SignInCallback/>}/>
+                <Route path={"/signin-oidc/*"} element={<SignInCallback/>}/>
                 <Route path={"area1"} element={<Area1Routes/>}/>
                 <Route path={"area2"} element={<Area2Routes/>}/>
                 <Route path={"/"}>

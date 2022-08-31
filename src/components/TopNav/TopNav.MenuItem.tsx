@@ -16,7 +16,7 @@ export function TopNavMenuItem(props: AuthMenuItemProps) {
             <MenuItem onClick={props.onClick}>
                 {(props?.iconPositioning === "end") &&
                     <ListItemText>
-                        <Typography marginRight={1} color={props.color}  variant={"h5"}>
+                        <Typography marginRight={1} color={props.color}  variant={"h6"}>
                             {props.title}
                         </Typography>
                     </ListItemText>}

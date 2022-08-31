@@ -33,7 +33,9 @@ function AuthProvider({ children, ...userManagerSettings }: UserManagerSettings 
             .catch((e) => setError(e))
             .finally(() => setLoading(false));
         userManager.events.addUserSignedOut(handleUserSignedOut);
+        userManager.events.addUserLoaded(handleUserLoaded);
         return () => {
+            userManager.events.removeUserSignedOut(handleUserSignedOut);
             userManager.events.removeUserLoaded(handleUserLoaded);
         };
     }, []);

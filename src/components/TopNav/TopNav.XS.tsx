@@ -17,7 +17,10 @@ function TopNavXS() {
         {text: "Area1", onClick: () => navigate("area1")},
         {text: "Area2", onClick: () => navigate("area2")}
     ]
-    const {loading, isAuthenticated, userManager: {signinRedirect}} = useAuth();
+    const {loading, isAuthenticated, userManager} = useAuth();
+    async function handleSignIn() {
+        await userManager.signinRedirect();
+    }
     return (
         <AppBar position="relative">
             <Toolbar variant={"dense"}>
@@ -39,8 +42,8 @@ function TopNavXS() {
                             <TopNavMenuItem title={""} icon={<HomeIcon/>} onClick={() => navigate("/")}
                                             color={"primary.contrastText"}/>
                             {
-                                isAuthenticated ? <TopNavUserMenu/> :
-                                    <TopNavMenuItem title={"Sign In"} onClick={signinRedirect}
+                                isAuthenticated ? <TopNavUserMenu dense/> :
+                                    <TopNavMenuItem title={"Sign In"} onClick={handleSignIn}
                                                     color={"primary.contrastText"}/>
                             }
                         </Stack>
