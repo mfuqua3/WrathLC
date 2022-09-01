@@ -11,14 +11,15 @@ import DrawerRoot from "./utils/drawer/DrawerRoot";
 function App() {
     const oidcEnvironmentConfig = useOidcEnvironmentConfiguration();
     return (
-        <AuthProvider {...oidcEnvironmentConfig} scope={"openid profile api"} loadUserInfo>
+        <AuthProvider {...oidcEnvironmentConfig} scope={"openid profile api"} loadUserInfo
+                      post_logout_redirect_uri={window.location.origin}>
             <ServersProvider>
                 <GuildsProvider>
                     <>
                         <AppRoutes/>
-                        <DrawerRoot />
-                        <SnackbarRoot />
-                        <ModalRoot />
+                        <DrawerRoot/>
+                        <SnackbarRoot/>
+                        <ModalRoot/>
                     </>
                 </GuildsProvider>
             </ServersProvider>
