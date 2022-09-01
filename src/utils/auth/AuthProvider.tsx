@@ -44,13 +44,6 @@ function AuthProvider({ children, ...userManagerSettings }: UserManagerSettings 
         const loadedUser = await userManager.getUser();
         setUser(loadedUser);
     }
-    function signin(){
-        userManager.signinRedirect();
-
-    }
-    // function handleUserSignedIn() {
-    //     setIsAuthenticated(true);
-    // }
 
     function handleUserSignedOut() {
         setUser(null);
@@ -66,7 +59,7 @@ function AuthProvider({ children, ...userManagerSettings }: UserManagerSettings 
     return (
         <AuthContext.Provider value={state}>
             <AxiosConfig />
-            {/*<SilentRefresh />*/}
+            <SilentRefresh />
             {children}
         </AuthContext.Provider>
     );

@@ -1,14 +1,17 @@
 import React from "react";
 import {DrawerConsumer} from "./DrawerConsumer";
-import {Box, Divider, Drawer} from "@mui/material";
+import {Box, Drawer} from "@mui/material";
+import ScrollWrapper from "../../components/UtilityWrappers/ScrollWrapper";
 
 const container = window !== undefined ? () => window.document.body : undefined;
 const drawerWidth = 240;
+
 function DrawerRoot() {
     return (
         <DrawerConsumer>{(state) =>
             state && (
                 <Drawer
+                    anchor={state.anchor}
                     container={container}
                     variant={"temporary"}
                     open={state.isOpen}
@@ -24,10 +27,14 @@ function DrawerRoot() {
                         if (state?.isOpen) {
                             state.close()
                         }
-                    }} sx={{textAlign: 'center'}}>
-                        {state.header}
-                        <Divider/>
-                        {state.content}
+                    }} sx={(theme)=>(
+                        {
+                            textAlign: 'center',
+                            height: "100%",
+                            width: "100%",
+                            background: theme.palette.secondary.light
+                        })}>
+                            {state.content}
                     </Box>
                 </Drawer>
             )

@@ -49,23 +49,52 @@ function GuildsProvider({children}: { children: ReactNode }) {
     }
 
     async function createGuild(request: CreateGuild): Promise<GuildDetail> {
-        const created = await invocator.invoke((api) => api.createGuild(request));
-        setGuilds((prev) => [...prev, {...created}]);
-        return created;
+        setProviderState("LOADING");
+        try {
+            const created = await invocator.invoke((api) => api.createGuild(request));
+            setGuilds((prev) => [...prev, {...created}]);
+            saveCurrentGuild(created);
+            setProviderState("READY");
+            return created;
+        } catch (e) {
+            setProviderState("ERROR");
+            throw e;
+        }
     }
 
     async function joinGuild(request: JoinGuild): Promise<GuildDetail> {
-        return await invocator.invoke(async api => {
-            await api.joinGuild(request.guildId);
-            return await api.getGuild(request.guildId);
-        })
+        setProviderState("LOADING");
+        try {
+            const guild = await invocator.invoke(async api => {
+                await api.joinGuild(request.guildId);
+                return await api.getGuild(request.guildId);
+            })
+            setGuilds((prev) => [...prev, {...guild}]);
+            saveCurrentGuild(guild);
+            setProviderState("READY");
+            return guild;
+        } catch (e) {
+            setProviderState("ERROR");
+            throw e;
+        }
     }
 
     async function selectGuild(request: SelectGuild): Promise<GuildDetail> {
-        const guild = await invocator.invoke(api => api.getGuild(request.guildId));
+        setProviderState("LOADING");
+        try {
+            const guild = await invocator.invoke(api => api.getGuild(request.guildId));
+            saveCurrentGuild(guild);
+            setProviderState("READY");
+            return guild;
+        } catch (e) {
+            setProviderState("ERROR");
+            throw e;
+        }
+    }
+
+    function saveCurrentGuild(guild: GuildDetail) {
         setValue(JSON.stringify(guild));
         setCurrentGuild(guild);
-        return guild;
     }
 
     const state: GuildsState = {

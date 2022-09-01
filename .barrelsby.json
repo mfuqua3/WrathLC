@@ -2,7 +2,6 @@
   "directory": [
     "./src/utils",
     "./src/domain",
-    "./src/components",
     "./src/core"
   ],
   "location": "below",

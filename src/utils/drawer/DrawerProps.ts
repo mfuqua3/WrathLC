@@ -1,6 +1,8 @@
 import {ReactNode} from "react";
 
+export type DrawerAnchor ="left" | "right" | "top" | "bottom";
+
 export interface DrawerProps {
-    header: ReactNode;
-    content: ReactNode | ReactNode[];
+    content: ReactNode;
+    anchor?: DrawerAnchor
 }

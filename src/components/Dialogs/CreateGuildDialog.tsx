@@ -32,7 +32,8 @@ function CreateGuildDialog() {
                               items={eligibleServers.map(x => ({label: x.name, value: x.id}))}
                               fullWidth/>
                 <FormikTextField label={"Choose a name for your Guild"}
-                                 name={"name"} type={"text"}/>
+                                 name={"name"} type={"text"}
+                                 helperText={"Will default to server name if left blank."}/>
             </Stack>
         </ModalFormLayout>
     )

@@ -1,25 +1,21 @@
 import React from "react";
-import {IconButton, ListItemText, Menu, MenuItem, Typography} from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout";
-import LoginIcon from "@mui/icons-material/Login";
-import PersonIcon from "@mui/icons-material/Person";
+import {Box, Divider, IconButton, ListItemText, Menu, MenuItem, Typography} from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {useMenu} from "../../utils/menu";
 import {useAuth} from "../../utils/auth";
 import AuthWrapper from "../UtilityWrappers/AuthWrapper";
+import {useCurrentGuild} from "../../core/guilds";
 import {TopNavMenuItem} from "./TopNav.MenuItem";
+import LogoutIcon from '@mui/icons-material/Logout';
+import {GuildSettings, UserSettings} from "../../utils/shared";
 
 function TopNavUserMenu(props: { dense?: boolean }) {
     const {open, close, isOpen, anchorEl} = useMenu();
     const {
         user,
-        loading,
         userManager,
     } = useAuth();
-
-    async function signin() {
-        await userManager.signinRedirect();
-    }
+    const currentGuild = useCurrentGuild();
 
     async function signout() {
         await userManager.signoutRedirect();
@@ -47,8 +43,8 @@ function TopNavUserMenu(props: { dense?: boolean }) {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+                    vertical: "bottom",
+                    horizontal: "center",
                 }}
                 keepMounted
                 transformOrigin={{
@@ -58,16 +54,45 @@ function TopNavUserMenu(props: { dense?: boolean }) {
                 open={isOpen}
                 onClose={close}
             >
-                {user && (
-                    <TopNavMenuItem title={"User Settings"} onClick={() => console.log("user settings")} icon={
-                        <PersonIcon/>}/>
-                )}
                 <AuthWrapper>
-                    <TopNavMenuItem onClick={signout} icon={<LogoutIcon/>} title={"Sign Out"}/>
+                    <MenuItem>
+                        <ListItemText>
+                            <Box display={"flex"} flexDirection={"row"}>
+                                <Typography>Signed in as&nbsp;</Typography>
+                                <Typography fontWeight={"bold"}>{user?.profile.name}</Typography>
+                            </Box>
+                        </ListItemText>
+                    </MenuItem>
+                    {
+                        currentGuild &&
+                        <MenuItem>
+                            <ListItemText>
+                                <Box display={"flex"} flexDirection={"row"}>
+                                    <Typography>{`${currentGuild.name} - Member`}</Typography>
+                                </Box>
+                            </ListItemText>
+                        </MenuItem>
+
+                    }
+                    <Divider/>
+                    {
+                        currentGuild &&
+                        <>
+                            {
+                                GuildSettings.map(setting =>
+                                    <TopNavMenuItem key={setting.title} {...setting} textVariant={"inherit"}/>)
+                            }
+                            <Divider/>
+                        </>
+                    }
+                    {
+                        UserSettings.map(setting =>
+                            <TopNavMenuItem key={setting.title} {...setting} textVariant={"inherit"}/>)
+                    }
+                    <Divider/>
+                    <TopNavMenuItem title={"Sign Out"} icon={<LogoutIcon/>}
+                                    textVariant={"inherit"} onClick={signout}/>
                 </AuthWrapper>
-                {!user && !loading && (
-                    <TopNavMenuItem onClick={signin} icon={<LoginIcon/>} title={"Sign In"}/>
-                )}
             </Menu>
         </>
     );

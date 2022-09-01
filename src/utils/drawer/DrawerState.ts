@@ -1,10 +1,10 @@
-import {DrawerProps} from "./DrawerProps";
+import {DrawerAnchor, DrawerProps} from "./DrawerProps";
 import {ReactNode} from "react";
 
 export interface DrawerState{
     isOpen: boolean;
-    open(props: DrawerProps): void;
+    open(props?: DrawerProps): void;
     close(): void;
-    header: ReactNode;
-    content: ReactNode |ReactNode[];
+    content: ReactNode ;
+    anchor: DrawerAnchor
 }
