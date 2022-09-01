@@ -19,4 +19,7 @@ public class OidcClientApplication
     [Required]
     [MinLength(1)]
     public List<string> RedirectUris { get; set; }
+    [Required]
+    [MinLength(1)]
+    public List<string> PostLogoutRedirectUris { get; set; }
 }

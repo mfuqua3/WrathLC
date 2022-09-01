@@ -219,7 +219,16 @@ public class AuthorizationController : Controller
     }
 
     [HttpGet("~/connect/logout")]
-    public IActionResult Logout() => View();
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        return SignOut(
+            authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
+            properties: new AuthenticationProperties
+            {
+                RedirectUri = "/"
+            });
+    }
 
     [ActionName(nameof(Logout)), HttpPost("~/connect/logout"), ValidateAntiForgeryToken]
     public async Task<IActionResult> LogoutPost()
