@@ -26,19 +26,23 @@ public class GuildsController : ApiController
         var result = await _tenancyManager.GetGuildsAsync(ForUser());
         return Ok(result);
     }
+
     /// <summary>
     /// Fetches the details of a specific guild for the authenticated user
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="guildId">The ID of the requested guild</param>
     /// <returns>A requested guild detail.</returns>
     /// <response code="200">The requested guild detail item</response>
     /// <response code="404">If the guild does not exist, or if the user is not a member to the requested guild</response>
-    [HttpGet("{GuildId}")]
+    [HttpGet("{guildId}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ExceptionModel))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ExceptionModel))]
-    public async Task<ActionResult<GuildDetailModel>> GetGuildDetailAsync(GetGuildDetailRequest request)
+    public async Task<ActionResult<GuildDetailModel>> GetGuildDetailAsync(int guildId)
     {
-        var result = await _tenancyManager.GetGuildDetailAsync(ForUser(request));
+        var result = await _tenancyManager.GetGuildDetailAsync(ForUser(new GetGuildDetailRequest
+        {
+            GuildId = guildId
+        }));
         return Ok(result);
     }
     /// <summary>

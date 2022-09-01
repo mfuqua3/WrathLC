@@ -28,7 +28,7 @@ services:
       ACCEPT_EULA: "Y"
   idp:
     build:
-      dockerfile: ./WrathLC.Idp/Dockerfile
+      dockerfile: ./WrathLC.Identity.Idp/Dockerfile
       context: .
       args:
         - http_proxy
@@ -59,36 +59,36 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  api:
-    build:
-      dockerfile: ./WrathLC.Api/Dockerfile
-      context: .
-      args:
-        - http_proxy
-        - https_proxy
-        - no_proxy
-        - CONFIGURATION=Debug
-    image: "api"
-    depends_on:
-      postgres:
-        condition: service_healthy
-    ports:
-      - "8501:8501"
-    volumes:
-      - ~/.aspnet/https:/https:ro
-    stdin_open: true # -i
-    tty: true # -t
-    environment:
-      ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Database=wrath-lc;User Id=postgres;Password=password"
-      Serilog:WriteTo:0:Name: "Console"
-      Serilog:WriteTo:1:Name: "Seq"
-      Serilog:WriteTo:1:Args:serverUrl: "http://seq:5341"
-      ASPNETCORE_ENVIRONMENT: "Development"
-      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "password"
-      PORT: 8501
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "https://api:8501/health" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+#  api:
+#    build:
+#      dockerfile: ./WrathLC.Api/Dockerfile
+#      context: .
+#      args:
+#        - http_proxy
+#        - https_proxy
+#        - no_proxy
+#        - CONFIGURATION=Debug
+#    image: "api"
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#    ports:
+#      - "8501:8501"
+#    volumes:
+#      - ~/.aspnet/https:/https:ro
+#    stdin_open: true # -i
+#    tty: true # -t
+#    environment:
+#      ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Database=wrath-lc;User Id=postgres;Password=password"
+#      Serilog:WriteTo:0:Name: "Console"
+#      Serilog:WriteTo:1:Name: "Seq"
+#      Serilog:WriteTo:1:Args:serverUrl: "http://seq:5341"
+#      ASPNETCORE_ENVIRONMENT: "Development"
+#      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+#      ASPNETCORE_Kestrel__Certificates__Default__Password: "password"
+#      PORT: 8501
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "https://api:8501/health" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5

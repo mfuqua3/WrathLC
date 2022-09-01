@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WrathLC.Core.Business.Manager.Contracts;
-using WrathLC.Core.Utility.DataContracts.Requests;
+using WrathLC.Business.Common;
 using WrathLC.Identity.Data;
+using WrathLC.Utility.Common.DataContracts.Requests;
 
 namespace WrathLC.Identity.Idp.Areas.Identity.Pages.Account
 {
