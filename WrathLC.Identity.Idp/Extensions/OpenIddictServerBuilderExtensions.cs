@@ -27,6 +27,7 @@ public static class OpenIddictConfigurationExtensions
             .AddDevelopmentEncryptionCertificate()
             .AddDevelopmentSigningCertificate();
         serverBuilder.UseAspNetCore()
+            .DisableTransportSecurityRequirement()
             .EnableAuthorizationEndpointPassthrough()
             .EnableLogoutEndpointPassthrough()
             .EnableTokenEndpointPassthrough()
