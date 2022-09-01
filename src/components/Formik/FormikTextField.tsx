@@ -5,6 +5,7 @@ import React from "react";
 interface OtherProps {
     label: string;
     type: string;
+    helperText?: string;
 }
 
 const FormikTextField = (props: OtherProps & FieldHookConfig<string | number>): JSX.Element => {
@@ -23,7 +24,7 @@ const FormikTextField = (props: OtherProps & FieldHookConfig<string | number>): 
             onChange={field.onChange}
             label={props.label}
             error={meta.touched && Boolean(meta.error)}
-            helperText={meta.touched && meta.error}
+            helperText={props.helperText ?? (meta.touched && meta.error)}
         />
 
     );

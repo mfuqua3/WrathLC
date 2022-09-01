@@ -3,7 +3,7 @@ import React from "react";
 function Area2(){
     return (
         <>
-            Hello from Area 2!
+            Hello from Admin!
         </>
 
     )

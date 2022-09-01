@@ -3,3 +3,5 @@
  */
 
 export * from "./MainLayout";
+export * from "./ModalFormLayout";
+export * from "./ModalLayout";

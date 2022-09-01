@@ -1,36 +1,41 @@
-import React, {useEffect} from "react";
-import {NavigationDrawerListItem, NavigationDrawerProps} from "./NavigationDrawerProps";
+import React, {ReactNode} from "react";
+import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import HomeIcon from '@mui/icons-material/Home';
+import {useNavigate} from "react-router-dom";
 import {useDrawer} from "../../utils/drawer";
-import {List, ListItem, ListItemButton, ListItemText} from "@mui/material";
 
-function NavigationDrawer({header, items, open, onClose}: NavigationDrawerProps) {
-    const drawer = useDrawer({
-        header,
-        content: <NavigationDrawerContent items={items}/>
-    })
-    useEffect(() => {
-        open ? drawer.open() : drawer.close();
-    }, [open])
-    useEffect(() => {
-        if (!drawer.isOpen) {
-            onClose();
-        }
-    }, [drawer.isOpen])
-    return null;
+interface DrawerItem {
+    icon: ReactNode;
+    title: string;
+    navigate: string;
 }
 
-function NavigationDrawerContent({items}: { items: NavigationDrawerListItem[] }) {
+function NavigationDrawer() {
+    const navigate = useNavigate();
+    const {close} = useDrawer();
+    const items: DrawerItem[] = [
+        {icon: <HomeIcon/>, title: "Home", navigate: "dashboard"}
+    ]
+
+    function handleClick(item: DrawerItem) {
+        navigate(item.navigate);
+        close();
+    }
+
     return (
         <List>
-            {items.map((item, idx) => (
-                <ListItem key={`drawer-item-${idx}`} disablePadding>
-                    <ListItemButton sx={{textAlign: 'center'}} onClick={item.onClick}>
-                        <ListItemText primary={item.text}/>
+            {items.map((item) =>
+                <ListItem key={item.title} disablePadding>
+                    <ListItemButton onClick={() => handleClick(item)}>
+                        <ListItemIcon>
+                            {item.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={item.title}/>
                     </ListItemButton>
-                </ListItem>
-            ))}
+                </ListItem>)}
         </List>
     )
 }
+
 
 export default React.memo(NavigationDrawer);
