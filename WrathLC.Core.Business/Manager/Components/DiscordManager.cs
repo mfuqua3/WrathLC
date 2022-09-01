@@ -1,9 +1,11 @@
 ﻿using Discord;
 using Microsoft.EntityFrameworkCore;
+using WrathLC.Business.Common;
 using WrathLC.Core.Business.Manager.Contracts;
 using WrathLc.Core.ResourceAccess;
 using WrathLc.Core.ResourceAccess.Entities;
 using WrathLC.Core.Utility.DataContracts.Requests;
+using WrathLC.Utility.Common.DataContracts.Requests;
 using WrathLC.Utility.Common.Discord;
 
 namespace WrathLC.Core.Business.Manager.Components;

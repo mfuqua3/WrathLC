@@ -3,6 +3,7 @@ using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WrathLC.Business.Common;
 using WrathLC.Core.Business.Manager.Components;
 using WrathLC.Core.Business.Manager.Contracts;
 using WrathLc.Core.ResourceAccess;

@@ -57,7 +57,7 @@ public class TenancyManager : ITenancyManager
         var guild = new Guild
         {
             DiscordServer = server,
-            Name = request.Name ?? server.Name,
+            Name = string.IsNullOrWhiteSpace(request.Name) ? server.Name : request.Name,
             GuildUsers = new List<GuildUser>
             {
                 new() { UserId = request.UserId }

@@ -52,9 +52,10 @@ public class IdentitySeedWorker : BackgroundService
                     Permissions.Scopes.Roles,
                     WrathLcPermissions.Api
                 },
-                Requirements = { Requirements.Features.ProofKeyForCodeExchange }
+                Requirements = { Requirements.Features.ProofKeyForCodeExchange },
             };
             clientDescriptor.RedirectUris.AddRange(client.RedirectUris.Select(x => new Uri(x)));
+            clientDescriptor.PostLogoutRedirectUris.AddRange(client.PostLogoutRedirectUris.Select(x => new Uri(x)));
 
             var existing = await manager.FindByClientIdAsync(client.ClientId, stoppingToken);
             if (existing == null)
