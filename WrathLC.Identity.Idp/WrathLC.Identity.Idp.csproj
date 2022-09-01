@@ -30,7 +30,6 @@
     <ItemGroup>
         <ProjectReference Include="..\WrathLC.Data.Common\WrathLC.Data.Common.csproj" />
         <ProjectReference Include="..\WrathLC.Utility.Common\WrathLC.Utility.Common.csproj" />
-        <ProjectReference Include="..\WrathLC.Core.Business\WrathLC.Core.Business.csproj" />
         <ProjectReference Include="..\WrathLC.Identity.Utility\WrathLC.Identity.Utility.csproj" />
         <ProjectReference Include="..\WrathLC.Identity.Business\WrathLC.Identity.Business.csproj" />
         <ProjectReference Include="..\WrathLC.Identity.Data\WrathLC.Identity.Data.csproj" />

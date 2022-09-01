@@ -12,6 +12,7 @@ COPY ["WrathLC.Identity.Utility/WrathLC.Identity.Utility.csproj", "WrathLC.Ident
 COPY ["WrathLC.Identity.Business/WrathLC.Identity.Business.csproj", "WrathLC.Identity.Business/"]
 COPY ["WrathLC.Data.Common/WrathLC.Data.Common.csproj", "WrathLC.Data.Common/"]
 COPY ["WrathLC.Utility.Common/WrathLC.Utility.Common.csproj", "WrathLC.Utility.Common/"]
+COPY ["WrathLC.Business.Common/WrathLC.Business.Common.csproj", "WrathLC.Business.Common/"]
 RUN dotnet restore "WrathLC.Identity.Idp/WrathLC.Identity.Idp.csproj"
 COPY . .
 WORKDIR "/src/WrathLC.Identity.Idp"

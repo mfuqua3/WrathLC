@@ -1,4 +1,4 @@
-﻿namespace WrathLC.Core.Utility.DataContracts.Requests;
+﻿namespace WrathLC.Utility.Common.DataContracts.Requests;
 
 public class SyncUserRequest
 {
