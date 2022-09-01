@@ -36,7 +36,6 @@ public class Startup
             {
                 var discordConfigSection =
                     _configuration.GetSection("Authentication:Discord");
-        
                 options.ClientId = discordConfigSection["ClientId"];
                 options.ClientSecret = discordConfigSection["ClientSecret"];
                 options.SaveTokens = true;
@@ -73,6 +72,10 @@ public class Startup
                 .AllowAnyMethod();
         });
         app.UseRouting();
+        app.UseCookiePolicy(new CookiePolicyOptions
+        {
+            Secure = CookieSecurePolicy.Always
+        });
         app.UseAuthentication();
         app.UseAuthorization();
 
