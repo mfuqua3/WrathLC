@@ -1,5 +1,6 @@
 ﻿using OpenIddict.Abstractions;
 using WrathLC.Identity.Data;
+using WrathLC.Identity.Idp.Options;
 using WrathLC.Utility.Common.Constants;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
@@ -7,9 +8,14 @@ namespace WrathLC.Identity.Idp.Extensions;
 
 public static class OpenIddictConfigurationExtensions
 {
-    public static void ConfigureServer(this OpenIddictServerBuilder serverBuilder)
+    public static void ConfigureServer(this OpenIddictServerBuilder serverBuilder, IConfiguration configuration)
     {
+        var serverOptions = configuration.GetSection("IdentityProvider").Get<IdentityProviderOptions>();
         serverBuilder.DisableAccessTokenEncryption();
+        if (!string.IsNullOrWhiteSpace(serverOptions?.Issuer))
+        {
+            serverBuilder.SetIssuer(new Uri(serverOptions.Issuer));
+        }
         serverBuilder
             .SetAuthorizationEndpointUris("/connect/authorize")
             .SetLogoutEndpointUris("/connect/logout")

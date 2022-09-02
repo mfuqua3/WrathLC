@@ -28,7 +28,7 @@ public class Startup
         services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
         services.AddOpenIddict()
             .AddCore(OpenIddictConfigurationExtensions.ConfigureCore)
-            .AddServer(OpenIddictConfigurationExtensions.ConfigureServer)
+            .AddServer((opt) => opt.ConfigureServer(_configuration))
             .AddValidation(OpenIddictConfigurationExtensions.ConfigureValidation);
         services
             .AddAuthentication()
@@ -41,10 +41,7 @@ public class Startup
                 options.SaveTokens = true;
                 options.Scope.Add("guilds");
             });
-        services.AddIdentity(_configuration, identity =>
-        {
-            identity.AddDefaultUI();
-        });
+        services.AddIdentity(_configuration, identity => { identity.AddDefaultUI(); });
         services.AddHealthChecks();
         services.AddOptions<OidcClientsConfiguration>()
             .Bind(_configuration)
@@ -62,6 +59,7 @@ public class Startup
         {
             app.UseStatusCodePagesWithReExecute("~/error");
         }
+
         app.UseHttpsRedirection();
         app.UseSerilogRequestLogging();
         app.UseStaticFiles();
