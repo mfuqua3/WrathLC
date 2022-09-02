@@ -67,9 +67,9 @@ public class Startup
         {
             endpoints.MapHealthChecks("/health");
             endpoints.MapControllers();
+            endpoints.MapHangfireDashboard();
             if (env.IsDevelopment())
             {
-                endpoints.MapHangfireDashboard();
             }
         });
     }
