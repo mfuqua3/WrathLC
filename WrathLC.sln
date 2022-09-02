@@ -28,6 +28,8 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 	api.yml = .github/workflows/api.yml
 	idp.yml = .github/workflows/idp.yml
+	aws-dev-api-task-definition.json = aws-dev-api-task-definition.json
+	aws-dev-idp-task-definition.json = aws-dev-idp-task-definition.json
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrathLC.Core.HangfireWorker", "WrathLC.Core.HangfireWorker\WrathLC.Core.HangfireWorker.csproj", "{65DA28F5-E2A5-470E-AF32-61FFFC2DFD5B}"
