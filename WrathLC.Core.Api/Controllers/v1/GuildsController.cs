@@ -65,20 +65,20 @@ public class GuildsController : ApiController
     /// <summary>
     /// Enrolls the authenticated user into the requested guild
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="guildId"></param>
     /// <returns></returns>
     /// <response code="201">Guild enrollment success.</response>
     /// <response code="400">If the user has already enrolled in the specified guild.</response>
     /// <response code="403">If the user is not a member of the guild's associated server.</response>
     /// <response code="404">If the guild does not exist.</response>
-    [HttpPost("{GuildId}/user")]
+    [HttpPost("{guildId}/user")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExceptionModel))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ExceptionModel))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ExceptionModel))]
-    public async Task<IActionResult> JoinGuildAsync(JoinGuildRequest request)
+    public async Task<IActionResult> JoinGuildAsync(int guildId)
     {
-        await _tenancyManager.JoinGuildAsync(ForUser(request));
+        await _tenancyManager.JoinGuildAsync(ForUser(new JoinGuildRequest{GuildId = guildId}));
         return Created("", null);
     }
 }
