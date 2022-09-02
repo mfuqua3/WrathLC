@@ -24,7 +24,7 @@ public class DiscordManager : IDiscordManager
     async Task IDiscordManager.SyncUserAsync(SyncUserRequest request)
     {
         var client = await _discordClientFactory.CreateNewAsync(new DiscordUserCredentials
-            { AccessToken = request.DiscordAccessToken });
+            { AccessToken = request.DiscordAccessToken});
         var guilds = (await client.GetGuildSummariesAsync().ToListAsync())
             .SelectMany(x => x)
             .Cast<IUserGuild>().ToList();
@@ -52,7 +52,7 @@ public class DiscordManager : IDiscordManager
             DiscordServer = servers.Single(s=>s.ServerId == x),
             UserId = request.UserId
         });
-        await _dbContext.AddRangeAsync(toAddServerUsers);
+        await _dbContext.DiscordServerUsers.AddRangeAsync(toAddServerUsers);
         await _dbContext.SaveChangesAsync();
     }
 }
