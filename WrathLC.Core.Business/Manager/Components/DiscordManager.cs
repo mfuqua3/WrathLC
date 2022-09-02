@@ -40,6 +40,7 @@ public class DiscordManager : IDiscordManager
             Name = x.Name
         }).ToList();
         await _dbContext.AddRangeAsync(servers);
+        servers = await _dbContext.DiscordServers.Where(x => guildIds.Contains(x.ServerId)).ToListAsync();
         var existingServerUsers = await _dbContext.DiscordServerUsers
             .Where(x => x.UserId == request.UserId && guildIds.Contains(x.DiscordServer.ServerId))
             .Select(x => x.DiscordServer.ServerId)
@@ -47,7 +48,8 @@ public class DiscordManager : IDiscordManager
         var toDeleteServerUsers = await _dbContext.DiscordServerUsers
             .Where(x => x.UserId == request.UserId && !guildIds.Contains(x.DiscordServer.ServerId)).ToListAsync();
         _dbContext.DiscordServerUsers.RemoveRange(toDeleteServerUsers);
-        var toAddServerUsers = servers.Where(x => !existingServerUsers.Contains(x.ServerId))
+        var toAddServerUsers = servers
+            .Where(x => !existingServerUsers.Contains(x.ServerId))
             .Select(x => new DiscordServerUser
             {
                 DiscordServer = x,
