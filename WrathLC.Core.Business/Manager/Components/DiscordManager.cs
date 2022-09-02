@@ -24,7 +24,7 @@ public class DiscordManager : IDiscordManager
     async Task IDiscordManager.SyncUserAsync(SyncUserRequest request)
     {
         var client = await _discordClientFactory.CreateNewAsync(new DiscordUserCredentials
-            { AccessToken = request.DiscordAccessToken});
+            { AccessToken = request.DiscordAccessToken });
         var guilds = (await client.GetGuildSummariesAsync().ToListAsync())
             .SelectMany(x => x)
             .Cast<IUserGuild>().ToList();
@@ -47,11 +47,12 @@ public class DiscordManager : IDiscordManager
         var toDeleteServerUsers = await _dbContext.DiscordServerUsers
             .Where(x => x.UserId == request.UserId && !guildIds.Contains(x.DiscordServer.ServerId)).ToListAsync();
         _dbContext.DiscordServerUsers.RemoveRange(toDeleteServerUsers);
-        var toAddServerUsers = guildIds.Except(existingServerUsers).Select(x => new DiscordServerUser
-        {
-            DiscordServer = servers.Single(s=>s.ServerId == x),
-            UserId = request.UserId
-        });
+        var toAddServerUsers = servers.Where(x => !existingServerUsers.Contains(x.ServerId))
+            .Select(x => new DiscordServerUser
+            {
+                DiscordServer = x,
+                UserId = request.UserId
+            });
         await _dbContext.DiscordServerUsers.AddRangeAsync(toAddServerUsers);
         await _dbContext.SaveChangesAsync();
     }
