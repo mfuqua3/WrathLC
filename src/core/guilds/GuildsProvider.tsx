@@ -32,7 +32,7 @@ function GuildsProvider({children}: { children: ReactNode }) {
         invocator
             .invoke(api => api.getGuilds())
             .then((guilds) => {
-                setGuilds(guilds);
+                setGuilds(guilds ?? []);
                 if (currentGuild && !guilds.some(g => g.id === currentGuild.id)) {
                     clearValue();
                     setCurrentGuild(null);
@@ -44,8 +44,23 @@ function GuildsProvider({children}: { children: ReactNode }) {
 
     function getCurrentGuildFromStorage(): GuildDetail | null {
         const storedValue = getValue();
-        if (!storedValue) return null;
-        return JSON.parse(storedValue);
+        if (!storedValue){
+            return null;
+        }
+        let stored: object | null;
+        try{
+            stored = JSON.parse(storedValue);
+        }
+        catch{
+            clearValue();
+            return null;
+
+        }
+        if(stored === null || !("id" in stored && "name" in stored)){
+            clearValue();
+            stored = null;
+        }
+        return stored as GuildDetail;
     }
 
     async function createGuild(request: CreateGuild): Promise<GuildDetail> {

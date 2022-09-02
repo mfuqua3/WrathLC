@@ -28,7 +28,7 @@ class GuildsAccess implements GuildsApi {
     }
 
     async joinGuild(guildId: number): Promise<void> {
-        await axios.post(`${this.apiRoot}/${guildId}`);
+        await axios.post(`${this.apiRoot}/${guildId}/user`);
     }
 }
 
