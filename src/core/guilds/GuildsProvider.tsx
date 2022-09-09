@@ -6,6 +6,7 @@ import {GuildDetail, GuildSummary} from "../../domain/models";
 import {CreateGuild, JoinGuild, SelectGuild} from "../../domain/requests";
 import {GuildsApi} from "../../api";
 import {useAuth} from "../../utils/auth";
+import GuildsAxiosInterceptor from "./GuildsAxiosInterceptor";
 
 export interface GuildsContextState {
     state: GuildsState;
@@ -124,6 +125,7 @@ function GuildsProvider({children}: { children: ReactNode }) {
     }
     return (
         <GuildsContext.Provider value={{state, actions}}>
+            <GuildsAxiosInterceptor />
             {children}
         </GuildsContext.Provider>
     )

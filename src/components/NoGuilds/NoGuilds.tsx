@@ -15,7 +15,7 @@ function NoGuilds() {
         })} padding={3} display={"flex"} alignItems={"center"} justifyContent={"center"}>
             <Paper sx={(theme) => ({height: "100%", maxWidth: "600px", background: theme.palette.secondary.light})}>
                 <ScrollWrapper>
-                    <Stack spacing={1} padding={2} marginLeft={5} display={"flex"} direction={"column"}>
+                    <Stack spacing={1} padding={2} margin={1} display={"flex"} direction={"column"}>
                         <Typography variant={"h2"}>
                             Welcome to WrathLC!
                         </Typography>
