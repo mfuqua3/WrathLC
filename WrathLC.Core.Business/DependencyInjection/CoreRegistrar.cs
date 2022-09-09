@@ -7,6 +7,7 @@ using WrathLC.Business.Common;
 using WrathLC.Core.Business.Manager.Components;
 using WrathLC.Core.Business.Manager.Contracts;
 using WrathLc.Core.ResourceAccess;
+using WrathLC.Items.Data.Extensions;
 using WrathLC.Utility.Common.Discord;
 using WrathLC.Utility.Common.Hangfire;
 
@@ -18,11 +19,15 @@ public static class CoreRegistrar
     {
         services.AddAutoMapper(cfg => { cfg.AddMaps(Assembly.GetExecutingAssembly()); });
         var connectionString = configuration.GetConnectionString("DefaultConnection");
-        services.AddDbContext<WrathLcDbContext>(opt => { opt.UseNpgsql(connectionString); });
+        services.AddDbContext<WrathLcDbContext>(opt =>
+        {
+            opt.UseNpgsql(connectionString);
+        });
         services.AddHangfire(cfg => cfg.UseWrathLcConfiguration(connectionString));
         services.AddDiscord();
         services
             .AddScoped<IDiscordManager, DiscordManager>()
+            .AddScoped<ICharacterManager, CharacterManager>()
             .AddScoped<ITenancyManager, TenancyManager>();
         return services;
     }

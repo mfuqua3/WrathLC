@@ -15,7 +15,7 @@ public static class QueryableExtensions
         }
         catch (InvalidOperationException ex)
         {
-            throw new KeyNotFoundException("The requested resource could not be found.", ex);
+            throw new KeyNotFoundException($"The requested {typeof(T).Name} could not be found, or the user does not have access.", ex);
         }
     }
     public static async Task<bool> ContainsOrNotFoundAsync<T>(this IQueryable<T> query, Expression<Func<T,bool>> predicate)

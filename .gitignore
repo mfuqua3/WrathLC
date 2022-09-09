@@ -14,3 +14,9 @@ seq-data/
 .vs/
 .vscode/
 Infra/dev/.terraform/providers/
+WrathLC.DataEngine/Items.db
+WrathLC.DataEngine/Items.db-shm
+WrathLC.DataEngine/Items.db-wal
+*.db
+*.db-shm
+*.db-wal
