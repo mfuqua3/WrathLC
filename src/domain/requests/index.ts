@@ -5,4 +5,5 @@
 export * from "./CreateCharacter";
 export * from "./CreateGuild";
 export * from "./JoinGuild";
+export * from "./PaginatedRequest";
 export * from "./SelectGuild";

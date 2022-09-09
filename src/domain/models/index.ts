@@ -9,3 +9,4 @@ export * from "./GuildCharacter";
 export * from "./GuildDetail";
 export * from "./GuildSummary";
 export * from "./Paginated";
+export * from "./PaginationMetadata";

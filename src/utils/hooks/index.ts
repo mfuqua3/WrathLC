@@ -6,4 +6,5 @@ export * from "./useApi";
 export * from "./useClickOutside";
 export * from "./useDebouce";
 export * from "./useOidcEnvironmentConfiguration";
+export * from "./usePagination";
 export * from "./useSessionStorage";

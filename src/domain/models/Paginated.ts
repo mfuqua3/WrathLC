@@ -1,8 +1,6 @@
-export interface Paginated<T> {
-    page: number;
-    pageSize: number;
-    pageCount: number;
-    totalCount: number;
+import {PaginationMetadata} from "./PaginationMetadata";
+
+export interface Paginated<T> extends PaginationMetadata{
     itemCount: number;
     items: T[];
 }
