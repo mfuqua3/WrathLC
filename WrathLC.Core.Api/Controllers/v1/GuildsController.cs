@@ -35,7 +35,7 @@ public class GuildsController : ApiController
     /// <response code="200">The requested guild detail item</response>
     /// <response code="404">If the guild does not exist, or if the user is not a member to the requested guild</response>
     [HttpGet("{guildId}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ExceptionModel))]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ExceptionModel))]
     public async Task<ActionResult<GuildDetailModel>> GetGuildDetailAsync(int guildId)
     {

@@ -22,13 +22,12 @@ public static class CoreRegistrar
         services.AddDbContext<WrathLcDbContext>(opt =>
         {
             opt.UseNpgsql(connectionString);
-            opt.EnableDetailedErrors();
-            opt.EnableSensitiveDataLogging();
         });
         services.AddHangfire(cfg => cfg.UseWrathLcConfiguration(connectionString));
         services.AddDiscord();
         services
             .AddScoped<IDiscordManager, DiscordManager>()
+            .AddScoped<ICharacterManager, CharacterManager>()
             .AddScoped<ITenancyManager, TenancyManager>();
         return services;
     }

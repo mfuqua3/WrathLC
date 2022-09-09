@@ -59,7 +59,7 @@ public class ExceptionHandlingMiddleware : IMiddleware
                 break;
             case KeyNotFoundException:
                 code = (int)HttpStatusCode.NotFound;
-                message = "No matching resource could be found.";
+                message = ex.Message;
                 break;
             case ServerIsTeapotException:
                 code = 418;
