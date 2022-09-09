@@ -4,11 +4,14 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
+
     <ItemGroup>
-        <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.8" />
     </ItemGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\WrathLC.Utility.Common\WrathLC.Utility.Common.csproj" />
     </ItemGroup>
+
 </Project>

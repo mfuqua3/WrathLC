@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WrathLc.Core.ResourceAccess;
@@ -11,9 +12,10 @@ using WrathLc.Core.ResourceAccess;
 namespace WrathLc.Core.ResourceAccess.Migrations
 {
     [DbContext(typeof(WrathLcDbContext))]
-    partial class WrathLcDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220909174654_Add_Items_Schema")]
+    partial class Add_Items_Schema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
