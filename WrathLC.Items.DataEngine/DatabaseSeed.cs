@@ -12,7 +12,10 @@ using WrathLC.Items.Data.Entities;
 
 namespace WrathLC.Items.DataEngine;
 
-public class PostgresSeed
+/// <summary>
+/// Copies local SQL Lite instance to remote database
+/// </summary>
+public class DatabaseSeed
 {
     public async Task RunAsync()
     {

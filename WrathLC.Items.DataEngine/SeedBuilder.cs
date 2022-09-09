@@ -13,7 +13,10 @@ using Icon = WrathLC.Items.Data.Entities.Icon;
 
 namespace WrathLC.Items.DataEngine;
 
-public class WowheadSeed
+/// <summary>
+/// Fetches all items from WowHead and saves them to a local SQL Lite instance
+/// </summary>
+public class SeedBuilder
 {
     public async Task RunAsync()
     {

@@ -10,7 +10,7 @@ public static class Program
     public static async Task Main()
     {
         //var seed = new WowheadSeed();
-        var seed = new PostgresSeed();
+        var seed = new DatabaseSeed();
         await seed.RunAsync();
         Console.Read();
     }
