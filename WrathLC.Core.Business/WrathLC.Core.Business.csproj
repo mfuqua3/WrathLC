@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\WrathLC.Business.Common\WrathLC.Business.Common.csproj" />
+      <ProjectReference Include="..\WrathLC.Items.Data\WrathLC.Items.Data.csproj" />
       <ProjectReference Include="..\WrathLC.Utility.Common\WrathLC.Utility.Common.csproj" />
       <ProjectReference Include="..\WrathLC.Core.Utility\WrathLC.Core.Utility.csproj" />
       <ProjectReference Include="..\WrathLC.Core.Data\WrathLC.Core.Data.csproj" />

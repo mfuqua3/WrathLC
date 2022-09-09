@@ -15,7 +15,7 @@ public class OidcClientApplication
     public string ClientId { get; set; }
     public string ClientSecret { get; set; }
     public bool FirstParty { get; set; }
-    public string? DisplayName { get; set; }
+    public string DisplayName { get; set; }
     [Required]
     [MinLength(1)]
     public List<string> RedirectUris { get; set; }
