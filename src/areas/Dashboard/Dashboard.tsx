@@ -1,9 +1,9 @@
 import React from "react";
-import { NoGuilds } from "../../components/NoGuilds";
+import {Onboarding} from "../../components/Onboarding";
 
 function Dashboard() {
     return (
-        <NoGuilds />
+        <Onboarding/>
     )
 }
 

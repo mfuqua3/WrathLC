@@ -10,7 +10,7 @@ export function useGuilds(): GuildsContextState {
     return state;
 }
 
-export function useCurrentGuild(): GuildDetail | null{
+export function useCurrentGuild(): GuildDetail | null {
     const {state: {currentGuild}} = useGuilds();
     return currentGuild;
 }

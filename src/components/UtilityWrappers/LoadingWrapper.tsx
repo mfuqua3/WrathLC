@@ -1,12 +1,12 @@
 import React from "react";
-import { CircularProgress, Fade, Grid } from "@mui/material";
-import { WrapperProps } from "./WrapperProps";
+import {CircularProgress, Fade, Grid} from "@mui/material";
+import {WrapperProps} from "./WrapperProps";
 
 export interface LoadingWrapperProps extends WrapperProps {
     loading: boolean;
 }
 
-function LoadingWrapper({ children, loading }: LoadingWrapperProps) {
+function LoadingWrapper({children, loading}: LoadingWrapperProps) {
     const sx = {
         wrapper: {
             display: "flex",
@@ -28,7 +28,7 @@ function LoadingWrapper({ children, loading }: LoadingWrapperProps) {
             {
                 <Fade in={loading} unmountOnExit={true}>
                     <Grid container onClick={(e) => e.preventDefault()} sx={sx.wrapper}>
-                        <CircularProgress size="4rem" sx={sx.spinner} />
+                        <CircularProgress size="4rem" sx={sx.spinner}/>
                     </Grid>
                 </Fade>
             }

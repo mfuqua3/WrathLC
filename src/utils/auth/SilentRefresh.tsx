@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
-import { useAuth } from "./useAuth";
+import React, {useEffect, useState} from "react";
+import axios, {AxiosError} from "axios";
+import {useAuth} from "./useAuth";
 
 function SilentRefresh() {
-    const { userManager } = useAuth();
+    const {userManager} = useAuth();
     const [refreshing, setRefreshing] = useState(false);
     useEffect(() => {
         userManager.events.addAccessTokenExpiring(TryRefreshToken);
@@ -25,7 +25,8 @@ function SilentRefresh() {
                                 const config = {
                                     ...error.config,
                                     headers: {
-                                        Authorization: `Bearer ${user.access_token}`,
+                                        ...error.config.headers,
+                                        authorization: `Bearer ${user.access_token}`,
                                     },
                                 };
                                 return axios

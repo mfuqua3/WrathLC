@@ -28,8 +28,8 @@ function JoinGuildDialog() {
                 <FormikSelect label={"Select a Guild to join"}
                               name={"serverId"}
                               disabled={joinableServers.length === 0}
-                              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                              items={joinableServers.map(x => ({value: x.guildId!, label: x.name}))}
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                              items={joinableServers.map(x => ({value: x.guildId!, content: x.name}))}
                               fullWidth/>
             </Stack>
         </ModalFormLayout>

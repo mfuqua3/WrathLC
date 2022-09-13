@@ -4,8 +4,11 @@ import axios from "axios";
 
 interface GuildsApi {
     getGuilds(): Promise<GuildSummary[]>;
+
     getGuild(guildId: number): Promise<GuildDetail>;
+
     createGuild(request: CreateGuild): Promise<GuildDetail>;
+
     joinGuild(guildId: number): Promise<void>;
 }
 

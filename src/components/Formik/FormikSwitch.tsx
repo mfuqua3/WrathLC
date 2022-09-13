@@ -1,5 +1,5 @@
-import { FormControlLabel, Switch } from "@mui/material";
-import { FieldHookConfig, useField } from "formik";
+import {FormControlLabel, Switch} from "@mui/material";
+import {FieldHookConfig, useField} from "formik";
 import React from "react";
 
 interface OtherProps {

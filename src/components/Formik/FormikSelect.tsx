@@ -1,9 +1,9 @@
 import {ErrorMessage, Field, FieldHookConfig, FieldInputProps, useField} from "formik";
-import React from "react";
+import React, {ReactNode} from "react";
 import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
 
 export interface FormikSelectItem {
-    label: string;
+    content: ReactNode;
     value: string | number;
 }
 
@@ -64,7 +64,7 @@ const FormikSelect = (props: OtherProps & FieldHookConfig<string | number>): JSX
         >
             {
                 items.map(item => (
-                    <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
+                    <MenuItem key={item.value} value={item.value}>{item.content}</MenuItem>
                 ))
             }
         </Field>

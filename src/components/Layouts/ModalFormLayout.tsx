@@ -17,16 +17,17 @@ export interface ModalFormLayoutProps<T> extends ModalLayoutProps {
 
 function ModalFormLayout<T extends object>(props: ModalFormLayoutProps<T> & { children: ReactNode }) {
     const {hideModal} = useModal();
-    function handleCancel(){
+
+    function handleCancel() {
         hideModal();
-        if(props.onCancel){
+        if (props.onCancel) {
             props.onCancel();
         }
 
     }
+
     return (
-        <Formik initialValues={props.initialValues} onSubmit={props.onSubmit} validationSchema={props.validationSchema}
-                enableReinitialize>
+        <Formik initialValues={props.initialValues} onSubmit={props.onSubmit} validationSchema={props.validationSchema}>
             {({isSubmitting, submitForm}: FormikProps<T>) => (
                 <Form>
                     <ModalLayout {...props} actions={

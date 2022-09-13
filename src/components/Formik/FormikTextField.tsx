@@ -1,5 +1,5 @@
-import { TextField } from "@mui/material";
-import { FieldHookConfig, useField } from "formik";
+import {TextField} from "@mui/material";
+import {FieldHookConfig, useField} from "formik";
 import React from "react";
 
 interface OtherProps {
@@ -14,6 +14,7 @@ const FormikTextField = (props: OtherProps & FieldHookConfig<string | number>): 
 
     return (
         <TextField
+            autoComplete={"off"}
             fullWidth
             variant="outlined"
             disabled={props.disabled}

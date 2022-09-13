@@ -1,6 +1,6 @@
 import React from "react";
-import { SnackbarContext } from "./SnackbarContext";
-import { SnackbarProps } from "./SnackbarProps";
+import {SnackbarContext} from "./SnackbarContext";
+import {SnackbarProps} from "./SnackbarProps";
 
 export const useSnackbar = (): ((props: SnackbarProps) => void) => {
     const state = React.useContext(SnackbarContext);

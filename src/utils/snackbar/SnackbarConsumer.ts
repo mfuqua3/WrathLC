@@ -1,3 +1,3 @@
-import { SnackbarContext } from "./SnackbarContext";
+import {SnackbarContext} from "./SnackbarContext";
 
 export const SnackbarConsumer = SnackbarContext.Consumer;

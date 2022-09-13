@@ -6,7 +6,7 @@ import ScrollWrapper from "../UtilityWrappers/ScrollWrapper";
 import AuthWrapper from "../UtilityWrappers/AuthWrapper";
 import {useAuth} from "../../utils/auth";
 
-function NoGuilds() {
+function Onboarding() {
     const {showModal} = useModal("medium");
     const {userManager} = useAuth();
     return (
@@ -15,7 +15,7 @@ function NoGuilds() {
         })} padding={3} display={"flex"} alignItems={"center"} justifyContent={"center"}>
             <Paper sx={(theme) => ({height: "100%", maxWidth: "600px", background: theme.palette.secondary.light})}>
                 <ScrollWrapper>
-                    <Stack spacing={1} padding={2} marginLeft={5} display={"flex"} direction={"column"}>
+                    <Stack spacing={1} padding={2} margin={1} display={"flex"} direction={"column"}>
                         <Typography variant={"h2"}>
                             Welcome to WrathLC!
                         </Typography>
@@ -35,7 +35,7 @@ function NoGuilds() {
                         <Divider/>
                         <AuthWrapper fallback={
                             <Typography variant={"h6"}>
-                                <Button variant={"contained"} onClick={()=>userManager.signinRedirect()}>
+                                <Button variant={"contained"} onClick={() => userManager.signinRedirect()}>
                                     Sign In to Access your Guilds
                                 </Button>
                             </Typography>
@@ -57,4 +57,4 @@ function NoGuilds() {
     )
 }
 
-export default React.memo(NoGuilds);
+export default React.memo(Onboarding);

@@ -8,14 +8,15 @@ import SettingsIcon from '@mui/icons-material/Settings';
 export interface SettingsItem {
     title: string;
     icon: ReactNode;
-    onClick?: ()=>(void | Promise<void>)
+    navigate?: string;
 }
+
 export const GuildSettings: SettingsItem[] = [
-    {title: "Your Characters", icon: <PeopleIcon />},
-    {title: "Your Wishlist", icon: <ViewListIcon />},
-    {title: "Your Raids", icon: <EventIcon />},
-    {title: "Your Loot History", icon: <EmojiEventsIcon />},
+    {title: "Your Characters", icon: <PeopleIcon/>, navigate: "user/characters"},
+    {title: "Your Wishlist", icon: <ViewListIcon/>},
+    {title: "Your Raids", icon: <EventIcon/>},
+    {title: "Your Loot History", icon: <EmojiEventsIcon/>},
 ]
 export const UserSettings: SettingsItem[] = [
-    {title: "Account Settings", icon: <SettingsIcon />}
+    {title: "Account Settings", icon: <SettingsIcon/>}
 ]

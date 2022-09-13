@@ -7,7 +7,8 @@ import AuthWrapper from "../UtilityWrappers/AuthWrapper";
 import {useCurrentGuild} from "../../core/guilds";
 import {TopNavMenuItem} from "./TopNav.MenuItem";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {GuildSettings, UserSettings} from "../../utils/shared";
+import {GuildSettings, SettingsItem, UserSettings} from "../../utils/shared";
+import {useNavigate} from "react-router-dom";
 
 function TopNavUserMenu(props: { dense?: boolean }) {
     const {open, close, isOpen, anchorEl} = useMenu();
@@ -16,9 +17,18 @@ function TopNavUserMenu(props: { dense?: boolean }) {
         userManager,
     } = useAuth();
     const currentGuild = useCurrentGuild();
+    const navigate = useNavigate();
 
     async function signout() {
         await userManager.signoutRedirect();
+    }
+
+    function handleSettingItemClicked(setting: SettingsItem) {
+        if (!setting.navigate) {
+            return;
+        }
+        close();
+        navigate(setting.navigate);
     }
 
     return (
@@ -80,14 +90,16 @@ function TopNavUserMenu(props: { dense?: boolean }) {
                         <>
                             {
                                 GuildSettings.map(setting =>
-                                    <TopNavMenuItem key={setting.title} {...setting} textVariant={"inherit"}/>)
+                                    <TopNavMenuItem onClick={() => handleSettingItemClicked(setting)}
+                                                    key={setting.title} {...setting} textVariant={"inherit"}/>)
                             }
                             <Divider/>
                         </>
                     }
                     {
                         UserSettings.map(setting =>
-                            <TopNavMenuItem key={setting.title} {...setting} textVariant={"inherit"}/>)
+                            <TopNavMenuItem onClick={() => handleSettingItemClicked(setting)}
+                                            key={setting.title} {...setting} textVariant={"inherit"}/>)
                     }
                     <Divider/>
                     <TopNavMenuItem title={"Sign Out"} icon={<LogoutIcon/>}

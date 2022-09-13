@@ -1,5 +1,5 @@
-import { SnackbarPosition } from "./SnackbarPosition";
-import { SnackbarType } from "./SnackbarType";
+import {SnackbarPosition} from "./SnackbarPosition";
+import {SnackbarType} from "./SnackbarType";
 
 export interface SnackbarProps {
     type?: SnackbarType;

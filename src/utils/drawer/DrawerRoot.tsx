@@ -1,7 +1,6 @@
 import React from "react";
 import {DrawerConsumer} from "./DrawerConsumer";
 import {Box, Drawer} from "@mui/material";
-import ScrollWrapper from "../../components/UtilityWrappers/ScrollWrapper";
 
 const container = window !== undefined ? () => window.document.body : undefined;
 const drawerWidth = 240;
@@ -27,14 +26,14 @@ function DrawerRoot() {
                         if (state?.isOpen) {
                             state.close()
                         }
-                    }} sx={(theme)=>(
+                    }} sx={(theme) => (
                         {
                             textAlign: 'center',
                             height: "100%",
                             width: "100%",
                             background: theme.palette.secondary.light
                         })}>
-                            {state.content}
+                        {state.content}
                     </Box>
                 </Drawer>
             )

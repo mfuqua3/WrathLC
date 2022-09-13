@@ -3,6 +3,11 @@
  */
 
 export * from "./ApiError";
+export * from "./Character";
 export * from "./DiscordServer";
+export * from "./GuildCharacter";
 export * from "./GuildDetail";
 export * from "./GuildSummary";
+export * from "./Paginated";
+export * from "./PaginationMetadata";
+export * from "./WowClassModel";

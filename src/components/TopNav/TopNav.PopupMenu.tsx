@@ -1,17 +1,17 @@
 import React from "react";
-import { IconButton, Menu } from "@mui/material";
+import {IconButton, Menu} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import { TopNavMenuItem } from "./TopNav.MenuItem";
-import { useMenu } from "../../utils/menu";
+import {TopNavMenuItem} from "./TopNav.MenuItem";
+import {useMenu} from "../../utils/menu";
 
 export interface TopNavPopupMenuProps {
     edge?: false | "start" | "end" | undefined;
 }
 
-function TopNavPopupMenu({ edge }: TopNavPopupMenuProps) {
-    const { open, close, isOpen, anchorEl } = useMenu();
+function TopNavPopupMenu({edge}: TopNavPopupMenuProps) {
+    const {open, close, isOpen, anchorEl} = useMenu();
     const navigate = useNavigate();
 
     function handleClick(target: string) {
@@ -29,7 +29,7 @@ function TopNavPopupMenu({ edge }: TopNavPopupMenuProps) {
                     open(e.currentTarget);
                 }}
             >
-                <MenuIcon className={"menu-icon"} />
+                <MenuIcon className={"menu-icon"}/>
             </IconButton>
             <Menu
                 id="menu-appbar"
@@ -46,8 +46,8 @@ function TopNavPopupMenu({ edge }: TopNavPopupMenuProps) {
                 open={isOpen}
                 onClose={close}
             >
-                <TopNavMenuItem onClick={() => handleClick("area1")} icon={<QuestionMarkIcon />} title={"Area1"} />
-                <TopNavMenuItem onClick={() => handleClick("area2")} icon={<QuestionMarkIcon />} title={"Area2"} />
+                <TopNavMenuItem onClick={() => handleClick("area1")} icon={<QuestionMarkIcon/>} title={"Area1"}/>
+                <TopNavMenuItem onClick={() => handleClick("area2")} icon={<QuestionMarkIcon/>} title={"Area2"}/>
             </Menu>
         </>
     );

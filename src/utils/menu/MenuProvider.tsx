@@ -1,9 +1,9 @@
-import React, { ReactNode, useState } from "react";
-import { MenuContext } from "./MenuContext";
-import { MenuRef } from "./MenuRef";
-import { MenuState } from "./MenuState";
+import React, {ReactNode, useState} from "react";
+import {MenuContext} from "./MenuContext";
+import {MenuRef} from "./MenuRef";
+import {MenuState} from "./MenuState";
 
-function MenuProvider({ children }: { children: ReactNode }) {
+function MenuProvider({children}: { children: ReactNode }) {
     const [menu, setMenu] = useState<MenuRef | null>(null);
 
     function open(anchorElement: Element): string {

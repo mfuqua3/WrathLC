@@ -13,7 +13,7 @@ export interface ModalLayoutProps {
 function ModalLayout(props: ModalLayoutProps & { children: ReactNode }) {
     const {hideModal} = useModal();
     return (
-        <Box minHeight={props.minHeight ?? "40vh"}>
+        <Box minHeight={props.minHeight ?? "20vh"}>
             <DialogTitle sx={(theme) => ({
                 backgroundColor: theme.palette.secondary.main,
             })}>{props.title}</DialogTitle>

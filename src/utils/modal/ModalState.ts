@@ -1,4 +1,4 @@
-import { ModalProps } from "./ModalProps";
+import {ModalProps} from "./ModalProps";
 
 export interface ModalState {
     component: JSX.Element | null;
