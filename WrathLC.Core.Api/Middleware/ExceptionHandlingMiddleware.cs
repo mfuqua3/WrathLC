@@ -85,7 +85,7 @@ public class ExceptionHandlingMiddleware : IMiddleware
             StatusCode = code,
             Message = message,
             StackTrace = _env.IsDevelopment() ? ex.StackTrace : null
-        });
+        }, new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
         await context.Response.WriteAsync(result);
     }
 }
