@@ -35,16 +35,16 @@ function SilentRefresh() {
                                         return resp.data;
                                     })
                                     .catch(() => {
-                                        return error;
+                                        return Promise.reject(error);
                                     });
                             }
-                            return error;
+                            return Promise.reject(error);
                         })
                         .catch(() => {
-                            return error;
+                            return Promise.reject(error);
                         });
                 }
-                return error;
+                return Promise.reject(error);
             },
         );
         return () => {
