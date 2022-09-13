@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { Alert, AlertColor, Snackbar } from "@mui/material";
-import { SnackbarContext } from "./SnackbarContext";
+import React, {useContext} from "react";
+import {Alert, AlertColor, Snackbar} from "@mui/material";
+import {SnackbarContext} from "./SnackbarContext";
 
 const SnackbarRoot = (): JSX.Element => {
     //const classes = useStyles();
@@ -10,7 +10,7 @@ const SnackbarRoot = (): JSX.Element => {
     }
     const {
         open,
-        props: { position, type, message },
+        props: {position, type, message},
         onClose,
     } = state;
 
@@ -65,7 +65,7 @@ const SnackbarRoot = (): JSX.Element => {
     return (
         <Snackbar
             open={open}
-            anchorOrigin={{ vertical: verticalAnchor(), horizontal: horizontalAnchor() }}
+            anchorOrigin={{vertical: verticalAnchor(), horizontal: horizontalAnchor()}}
             autoHideDuration={4000}
             onClose={onClose}
             sx={sx}

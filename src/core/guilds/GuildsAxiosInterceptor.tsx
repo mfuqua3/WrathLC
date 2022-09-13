@@ -7,13 +7,14 @@ function GuildsAxiosInterceptor() {
     useEffect(() => {
         const interceptor = axios.interceptors.request.use(SetAxiosHeader);
         return () => axios.interceptors.request.eject(interceptor);
-    }, []);
+    }, [currentGuild]);
 
     async function SetAxiosHeader(config: AxiosRequestConfig) {
-        if(currentGuild == null || !config.headers){
-            return;
+        if (!currentGuild) {
+            return config;
         }
-        config.headers["guildId"] = currentGuild.id;
+        config.headers = {...config.headers, guildId: currentGuild.id};
+        return config;
     }
 
     return null;

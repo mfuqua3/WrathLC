@@ -1,12 +1,12 @@
-import { User, UserManager, UserManagerSettings } from "oidc-client-ts";
-import React, { ReactNode, useEffect, useState } from "react";
-import { AuthContext } from "./AuthContext";
-import SilentRefresh from "./SilentRefresh";
+import {User, UserManager, UserManagerSettings} from "oidc-client-ts";
+import React, {ReactNode, useEffect, useState} from "react";
+import {AuthContext} from "./AuthContext";
 import AxiosConfig from "./AxiosConfig";
+import SilentRefresh from "./SilentRefresh";
 
 type AuthenticationState = "Initializing" | "Unauthenticated" | "Authenticated";
 
-function AuthProvider({ children, ...userManagerSettings }: UserManagerSettings & { children: ReactNode }) {
+function AuthProvider({children, ...userManagerSettings}: UserManagerSettings & { children: ReactNode }) {
     const [userManager] = useState(
         new UserManager({
             ...userManagerSettings,
@@ -53,12 +53,12 @@ function AuthProvider({ children, ...userManagerSettings }: UserManagerSettings 
         userManager,
         user: user ?? null,
         isAuthenticated: authenticationState === "Authenticated",
-        loading,
+        loading : loading || authenticationState === "Initializing",
         error,
     };
     return (
         <AuthContext.Provider value={state}>
-            <AxiosConfig />
+            <AxiosConfig/>
             <SilentRefresh />
             {children}
         </AuthContext.Provider>

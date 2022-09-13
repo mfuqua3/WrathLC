@@ -1,12 +1,6 @@
-export interface SessionStorageProps {
-    setValue(value: string): void;
+import {StorageProps} from "./storageProps";
 
-    getValue(): string | null;
-
-    clearValue(): void;
-}
-
-export function useSessionStorage(key: string): SessionStorageProps {
+export function useSessionStorage(key: string): StorageProps {
     function setValue(value: string): void {
         sessionStorage.setItem(key, value);
     }

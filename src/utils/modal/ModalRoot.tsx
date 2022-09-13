@@ -1,7 +1,7 @@
 import React from "react";
-import { ModalSize } from "./ModalSize";
-import { Box, Modal } from "@mui/material";
-import { ModalConsumer } from "./ModalConsumer";
+import {ModalSize} from "./ModalSize";
+import {Box, Modal} from "@mui/material";
+import {ModalConsumer} from "./ModalConsumer";
 
 const modalSize = (size: ModalSize) => {
     switch (size) {

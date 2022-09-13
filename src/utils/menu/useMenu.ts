@@ -1,6 +1,6 @@
-import { MenuProps } from "./MenuProps";
-import { MenuContext } from "./MenuContext";
-import { useContext, useState } from "react";
+import {MenuProps} from "./MenuProps";
+import {MenuContext} from "./MenuContext";
+import {useContext, useState} from "react";
 
 export function useMenu(): MenuProps {
     const state = useContext(MenuContext);

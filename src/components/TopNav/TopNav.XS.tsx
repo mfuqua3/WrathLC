@@ -12,7 +12,7 @@ import {SettingsDrawer} from "../SettingsDrawer";
 function TopNavXS() {
     const {userManager} = useAuth();
     const navigationDrawer = useDrawer({content: <NavigationDrawer/>, anchor: "left"});
-    const settingsDrawer = useDrawer({content: <SettingsDrawer />, anchor: "right"});
+    const settingsDrawer = useDrawer({content: <SettingsDrawer/>, anchor: "right"});
 
     async function handleSignIn() {
         await userManager.signinRedirect();

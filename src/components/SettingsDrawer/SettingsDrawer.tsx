@@ -14,17 +14,27 @@ import {
 import {useAuth} from "../../utils/auth";
 import AuthWrapper from "../UtilityWrappers/AuthWrapper";
 import {useGuilds} from "../../core/guilds";
-import {GuildSettings, UserSettings} from "../../utils/shared";
+import {GuildSettings, SettingsItem, UserSettings} from "../../utils/shared";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddIcon from '@mui/icons-material/Add';
 import BuildIcon from '@mui/icons-material/Build';
 import {useModal} from "../../utils/modal";
 import {CreateGuildDialog, JoinGuildDialog} from "../Dialogs";
+import {useNavigate} from "react-router-dom";
 
 function SettingsDrawer() {
     const {user, userManager} = useAuth();
     const {state: {guilds, currentGuild}, actions} = useGuilds();
     const {showModal} = useModal("medium");
+    const navigate = useNavigate();
+
+    function handleSettingItemClicked(setting: SettingsItem) {
+        if (!setting.navigate) {
+            return;
+        }
+        navigate(setting.navigate);
+    }
+
     return (
         <AuthWrapper>
             <List>
@@ -55,7 +65,8 @@ function SettingsDrawer() {
                     <List>
                         {GuildSettings.map(setting =>
                             <ListItem key={setting.title} disablePadding>
-                                <ListItemButton onClick={setting.onClick}>
+                                <ListItemButton
+                                    onClick={() => handleSettingItemClicked(setting)}>
                                     <ListItemIcon>
                                         {setting.icon}
                                     </ListItemIcon>
@@ -69,7 +80,8 @@ function SettingsDrawer() {
             <List>
                 {UserSettings.map(setting =>
                     <ListItem key={setting.title} disablePadding>
-                        <ListItemButton onClick={setting.onClick}>
+                        <ListItemButton
+                            onClick={() => handleSettingItemClicked(setting)}>
                             <ListItemIcon>
                                 {setting.icon}
                             </ListItemIcon>

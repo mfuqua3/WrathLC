@@ -1,6 +1,6 @@
 import React from "react";
 
-function Area2(){
+function Area2() {
     return (
         <>
             Hello from Admin!

@@ -3,11 +3,11 @@ import {DrawerProps} from "./DrawerProps";
 import {DrawerContext} from "./DrawerContext";
 
 export interface DrawerController {
+    isOpen: boolean;
+
     open(): void;
 
     close(): void;
-
-    isOpen: boolean;
 }
 
 export function useDrawer(props?: DrawerProps): DrawerController {

@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function Error() {
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ function Error() {
             alignItems={"center"}
             justifyContent={"center"}
         >
-            <ErrorOutlineIcon color={"primary"} sx={{ fontSize: 50 }} />
+            <ErrorOutlineIcon color={"primary"} sx={{fontSize: 50}}/>
             <Typography variant={"h4"} marginTop={3}>
                 An Error Has Occurred
             </Typography>

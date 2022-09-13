@@ -3,6 +3,7 @@ import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/m
 import HomeIcon from '@mui/icons-material/Home';
 import {useNavigate} from "react-router-dom";
 import {useDrawer} from "../../utils/drawer";
+import {WrathLcRoutes} from "../../App.Routes";
 
 interface DrawerItem {
     icon: ReactNode;
@@ -14,7 +15,7 @@ function NavigationDrawer() {
     const navigate = useNavigate();
     const {close} = useDrawer();
     const items: DrawerItem[] = [
-        {icon: <HomeIcon/>, title: "Home", navigate: "dashboard"}
+        {icon: <HomeIcon/>, title: "Home", navigate: WrathLcRoutes.dashboard}
     ]
 
     function handleClick(item: DrawerItem) {

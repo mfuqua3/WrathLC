@@ -4,3 +4,7 @@
 
 export {default as CreateGuildDialog} from "./CreateGuildDialog";
 export {default as JoinGuildDialog} from "./JoinGuildDialog";
+export {default as CreateCharacterDialog} from "./CreateCharacterDialog";
+export {default as ChangeCharacterNameDialog} from "./ChangeCharacterNameDialog";
+export {default as ConfirmationDialog} from "./ConfirmationDialog";
+export * from "./ConfirmationDialog";

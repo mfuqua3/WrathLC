@@ -1,14 +1,20 @@
 import {Character, GuildCharacter, Paginated} from "../domain/models";
-import {CreateCharacter} from "../domain/requests";
+import {ChangeCharacterNameRequest, CreateCharacter} from "../domain/requests";
 import axios from "axios";
 
 interface CharactersApi {
-    createCharacter(request: CreateCharacter) : Promise<Character>;
+    createCharacter(request: CreateCharacter): Promise<Character>;
+
     getUserCharacters(): Promise<Character[]>;
+
     getGuildCharacters(): Promise<Paginated<GuildCharacter>>;
+
+    changeCharacterName(request: ChangeCharacterNameRequest): Promise<Character>;
+
+    deleteCharacter(characterId: number): Promise<void>
 }
 
-class CharactersAccess implements CharactersApi{
+class CharactersAccess implements CharactersApi {
     private apiRoot = process.env.REACT_APP_API_ROOT + "/characters";
 
     async createCharacter(request: CreateCharacter): Promise<Character> {
@@ -26,5 +32,15 @@ class CharactersAccess implements CharactersApi{
         const resp = await axios.get<Paginated<GuildCharacter>>(this.apiRoot);
         return resp.data;
     }
+
+    async changeCharacterName({characterId, ...body}: ChangeCharacterNameRequest): Promise<Character> {
+        const resp = await axios.put<Character>(`${this.apiRoot}/${characterId}/name`, body);
+        return resp.data;
+    }
+
+    async deleteCharacter(characterId: number): Promise<void> {
+        await axios.delete(`${this.apiRoot}/${characterId}`);
+    }
 }
+
 export default new CharactersAccess() as CharactersApi;

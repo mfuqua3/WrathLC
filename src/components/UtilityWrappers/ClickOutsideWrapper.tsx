@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
-import { Box } from "@mui/material";
+import React, {useEffect, useRef} from "react";
+import {Box} from "@mui/material";
 import useClickOutside from "../../utils/hooks/useClickOutside";
-import { WrapperProps } from "./WrapperProps";
+import {WrapperProps} from "./WrapperProps";
 
 interface ClickOutsideWrapperProps extends WrapperProps {
     isOpen: boolean;

@@ -1,4 +1,4 @@
-import { User, UserManager } from "oidc-client-ts";
+import {User, UserManager} from "oidc-client-ts";
 
 export interface AuthState {
     userManager: UserManager;

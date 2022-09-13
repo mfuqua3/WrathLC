@@ -1,7 +1,7 @@
 import React from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { Box, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import {Box, Button, Typography} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 function AccessDenied() {
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ function AccessDenied() {
             alignItems={"center"}
             justifyContent={"center"}
         >
-            <ErrorOutlineIcon color={"primary"} sx={{ fontSize: 50 }} />
+            <ErrorOutlineIcon color={"primary"} sx={{fontSize: 50}}/>
             <Typography variant={"h4"} marginTop={3}>
                 Access Denied
             </Typography>

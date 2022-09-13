@@ -1,4 +1,4 @@
-import { ModalSize } from "./ModalSize";
+import {ModalSize} from "./ModalSize";
 
 export interface ModalProps {
     isOpen: boolean;

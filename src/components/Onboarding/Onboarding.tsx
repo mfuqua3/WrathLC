@@ -6,7 +6,7 @@ import ScrollWrapper from "../UtilityWrappers/ScrollWrapper";
 import AuthWrapper from "../UtilityWrappers/AuthWrapper";
 import {useAuth} from "../../utils/auth";
 
-function NoGuilds() {
+function Onboarding() {
     const {showModal} = useModal("medium");
     const {userManager} = useAuth();
     return (
@@ -35,7 +35,7 @@ function NoGuilds() {
                         <Divider/>
                         <AuthWrapper fallback={
                             <Typography variant={"h6"}>
-                                <Button variant={"contained"} onClick={()=>userManager.signinRedirect()}>
+                                <Button variant={"contained"} onClick={() => userManager.signinRedirect()}>
                                     Sign In to Access your Guilds
                                 </Button>
                             </Typography>
@@ -57,4 +57,4 @@ function NoGuilds() {
     )
 }
 
-export default React.memo(NoGuilds);
+export default React.memo(Onboarding);

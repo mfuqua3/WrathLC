@@ -29,7 +29,7 @@ function CreateGuildDialog() {
             <Stack spacing={2}>
                 <FormikSelect label={"Link an eligible Discord Server"}
                               name={"serverId"}
-                              items={eligibleServers.map(x => ({label: x.name, value: x.id}))}
+                              items={eligibleServers.map(x => ({content: x.name, value: x.id}))}
                               fullWidth/>
                 <FormikTextField label={"Choose a name for your Guild"}
                                  name={"name"} type={"text"}
