@@ -30,7 +30,8 @@ public static class CoreRegistrar
         services
             .AddScoped<IDiscordManager, DiscordManager>()
             .AddScoped<ICharacterManager, CharacterManager>()
-            .AddScoped<ITenancyManager, TenancyManager>();
+            .AddScoped<ITenancyManager, TenancyManager>()
+            .AddScoped<IWishlistManager, WishlistManager>();
         services
             .AddScoped<ICharacterNameEngine, CharacterNameEngine>();
         return services;
