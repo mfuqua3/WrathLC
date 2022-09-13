@@ -58,4 +58,26 @@ public class CharactersController : ApiController
         var result = await _characterManager.GetGuildsCharactersAsync(ForUser(request));
         return Ok(result);
     }
+
+    [HttpPut("{characterId}/name")]
+    public async Task<ActionResult<GuildCharacterModel>> ChangeCharacterNameAsync([FromRoute] int characterId,
+        [FromBody] ChangeCharacterNameRequest request, [FromHeader] int guildId)
+    {
+        request.CharacterId = characterId;
+        request.GuildId = guildId;
+        var result = await _characterManager.ChangeCharacterNameAsync(ForUser(request));
+        return Ok(result);
+    }
+    
+    [HttpDelete("{characterId}")]
+    public async Task<IActionResult> DeleteCharacterAsync(int characterId, [FromHeader] int guildId)
+    {
+        var request = ForUser(new DeleteProtectedResourceRequest
+        {
+            ResourceId = characterId,
+            GuildId = guildId
+        });
+        await _characterManager.DeleteCharacterAsync(request);
+        return NoContent();
+    }
 }

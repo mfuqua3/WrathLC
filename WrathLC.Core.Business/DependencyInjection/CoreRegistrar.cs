@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WrathLC.Business.Common;
+using WrathLC.Core.Business.Engine.Components;
+using WrathLC.Core.Business.Engine.Contracts;
 using WrathLC.Core.Business.Manager.Components;
 using WrathLC.Core.Business.Manager.Contracts;
 using WrathLc.Core.ResourceAccess;
@@ -29,6 +31,8 @@ public static class CoreRegistrar
             .AddScoped<IDiscordManager, DiscordManager>()
             .AddScoped<ICharacterManager, CharacterManager>()
             .AddScoped<ITenancyManager, TenancyManager>();
+        services
+            .AddScoped<ICharacterNameEngine, CharacterNameEngine>();
         return services;
     }
 }
