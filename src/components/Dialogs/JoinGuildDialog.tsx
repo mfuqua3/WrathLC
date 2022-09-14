@@ -26,7 +26,7 @@ function JoinGuildDialog() {
                          title={"Join an Existing Guild"} loading={loading}>
             <Stack spacing={2}>
                 <FormikSelect label={"Select a Guild to join"}
-                              name={"serverId"}
+                              name={"guildId"}
                               disabled={joinableServers.length === 0}
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                               items={joinableServers.map(x => ({value: x.guildId!, content: x.name}))}
