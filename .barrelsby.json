@@ -1,0 +1,10 @@
+{
+  "directory": [
+    "./src/utils",
+    "./src/domain",
+    "./src/core"
+  ],
+  "location": "below",
+  "exclude": ["__mock__", "__mocks__", ".spec.ts"],
+  "delete": true
+}
