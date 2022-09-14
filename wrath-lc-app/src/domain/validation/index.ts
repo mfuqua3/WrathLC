@@ -4,3 +4,4 @@
 
 export * from "./ChangeCharacterNameValidationSchema";
 export * from "./CreateCharacterValidationSchema";
+export * from "./GetWishlistOptionsValidationSchema";

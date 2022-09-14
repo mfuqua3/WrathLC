@@ -13,7 +13,7 @@ export interface SettingsItem {
 
 export const GuildSettings: SettingsItem[] = [
     {title: "Your Characters", icon: <PeopleIcon/>, navigate: "user/characters"},
-    {title: "Your Wishlist", icon: <ViewListIcon/>},
+    {title: "Your Wishlist", icon: <ViewListIcon/>, navigate: "user/wishlists"},
     {title: "Your Raids", icon: <EventIcon/>},
     {title: "Your Loot History", icon: <EmojiEventsIcon/>},
 ]

@@ -17,6 +17,8 @@
     "moment-timezone": "^0.5.34",
     "oidc-client-ts": "^2.0.3",
     "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.1",

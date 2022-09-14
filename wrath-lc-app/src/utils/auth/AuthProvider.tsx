@@ -11,7 +11,7 @@ function AuthProvider({children, ...userManagerSettings}: UserManagerSettings & 
         new UserManager({
             ...userManagerSettings,
             accessTokenExpiringNotificationTimeInSeconds: 600,
-            automaticSilentRenew: false,
+            automaticSilentRenew: true,
         }),
     );
     const [authenticationState, setAuthenticationState] = useState<AuthenticationState>("Initializing");
