@@ -75,7 +75,7 @@ public class TenancyManager : ITenancyManager
     {
         var serverId = await _dbContext.Guilds
             .Where(x => x.Id == request.GuildId)
-            .Select(x => x.Id)
+            .Select(x => x.DiscordServerId)
             .SingleOrNotFoundAsync();
         var authorizedToJoin = await _dbContext.DiscordServerUsers.AnyAsync(x =>
             x.UserId == request.UserId && x.DiscordServerId == serverId);
