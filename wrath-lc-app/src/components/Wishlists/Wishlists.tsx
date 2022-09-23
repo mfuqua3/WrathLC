@@ -1,31 +1,84 @@
-import React, {useRef} from "react";
+import React, {useEffect, useState} from "react";
 import {useWishlists} from "../../core/wishlists";
 import {ItemSummary, WishlistItem} from "../../domain/models";
 import {SearchInputProps} from "../SearchInput/SearchInput";
 import {WishlistItemRequest} from "../../domain/requests";
 import {SearchInput} from "../SearchInput";
 import ItemComponent from "../Items/ItemComponent";
-import {Avatar, Box, List, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
+import {Avatar, Box, IconButton, ListItemAvatar, ListItemText} from "@mui/material";
 import WowheadTooltip from "../UtilityWrappers/WowheadTooltip";
 import ItemIcon from "../Icons/ItemIcon";
 import "./wishlists.css";
-import {useDrag, useDrop} from "react-dnd";
-import type { Identifier, XYCoord } from 'dnd-core'
+import Container, {ContainerState} from "../DragAndDrop/Container";
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import {HasId} from "../../domain/utility-types";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-function Wishlists() {
+export interface WishlistsProps {
+    enableReorderButtons?: boolean;
+}
+
+type StagedWishlistItem = WishlistItem & HasId;
+
+function Wishlists(props: WishlistsProps) {
     const {wishlist, update, getOptions} = useWishlists();
     const itemRequestState: WishlistItemRequest[] = wishlist?.items.map(wishlistItem => ({
         orderNumber: wishlistItem.orderNumber,
         itemId: wishlistItem.item.itemId
     })) ?? [];
+    const [stagedWishlistState, setStagedWishlistState] = useState<StagedWishlistItem[]>(
+        wishlist?.items.map((item, idx) => ({...item, id: idx})) ?? []);
+    const enableReorder = stagedWishlistState.length > 1 && (props.enableReorderButtons ?? false);
+    useEffect(() => {
+        if (wishlist) {
+            setStagedWishlistState(wishlist.items.map((item, idx) => ({...item, id: idx})));
+        }
+
+    }, [wishlist]);
 
     async function handleSelection(item: ItemSummary) {
         await update([...itemRequestState, {orderNumber: itemRequestState.length, itemId: item.itemId}]);
     }
 
+    async function handleUpdate(wishlistState: StagedWishlistItem[]) {
+        const itemRequests: WishlistItemRequest[] = wishlistState.map(({item}, idx) => ({
+            orderNumber: idx,
+            itemId: item.itemId
+        }))
+        await update(itemRequests);
+    }
+
+    async function up(orderNumber: number){
+        const currentIndex = stagedWishlistState.findIndex(x=>x.orderNumber === orderNumber);
+        if(currentIndex < 1)
+            return;
+        const item = stagedWishlistState[currentIndex];
+        const others = stagedWishlistState.filter(x=>x.orderNumber !== orderNumber);
+        const requestState = [...others.slice(0, currentIndex - 1), item, ...others.slice(currentIndex - 1)];
+        const itemRequests: WishlistItemRequest[] = requestState.map(({item}, idx) => ({
+            orderNumber: idx,
+            itemId: item.itemId
+        }))
+        await update(itemRequests);
+    }
+    async function down(orderNumber: number){
+        const currentIndex = stagedWishlistState.findIndex(x=>x.orderNumber === orderNumber);
+        if(currentIndex === -1 || currentIndex >= stagedWishlistState.length - 1)
+            return;
+        const item = stagedWishlistState[currentIndex];
+        const others = stagedWishlistState.filter(x=>x.orderNumber !== orderNumber);
+        const requestState = [...others.slice(0, currentIndex + 1), item, ...others.slice(currentIndex + 1)];
+        const itemRequests: WishlistItemRequest[] = requestState.map(({item}, idx) => ({
+            orderNumber: idx,
+            itemId: item.itemId
+        }))
+        await update(itemRequests);
+    }
+
     const searchInputProps: SearchInputProps = {
         fetchItems: getOptions,
-        getItemId: (item) => item.name,
+        getItemId: (item) => item.itemId,
         onSelection: handleSelection,
         renderItem: (item) =>
             <WowheadTooltip {...item}>
@@ -33,118 +86,66 @@ function Wishlists() {
             </WowheadTooltip>
     }
 
-    async function handleDragEnd(dragIndex: number, hoverIndex: number) {
-        console.log("drag" + dragIndex);
-        console.log("hover" + hoverIndex);
+    async function handleRemove(orderNumber: number) {
+        const itemRequests: WishlistItemRequest[] = stagedWishlistState.filter(x => x.orderNumber !== orderNumber).map(({item}, idx) => ({
+            orderNumber: idx,
+            itemId: item.itemId
+        }));
+        await update(itemRequests);
     }
 
+    const dragAndDropContainerProps: ContainerState<StagedWishlistItem> = {
+        cards: stagedWishlistState,
+        onDrop: handleUpdate,
+        cardTemplate: ({item, orderNumber}: StagedWishlistItem, _, index) =>
+            <>
+                {
+                    enableReorder &&
+                    <>
+                        <IconButton onClick={()=>up(orderNumber)}
+                            disabled={index === 0} sx={{opacity: index === 0 ? 0 : 1}}>
+                            <ArrowUpwardIcon/>
+                        </IconButton>
+                        <IconButton  onClick={()=>down(orderNumber)}
+                            disabled={index + 1 === stagedWishlistState.length}
+                                    sx={{opacity: index + 1 === stagedWishlistState.length ? 0 : 1}}>
+                            <ArrowDownwardIcon/>
+                        </IconButton>
+                    </>
+                }
+                <ListItemAvatar>
+                    <Avatar>
+                        <WowheadTooltip {...item}>
+                            <ItemIcon iconName={item.iconName} height={40}/>
+                        </WowheadTooltip>
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={
+                    <Box component={"span"}>
+                        {item.name}
+                    </Box>} secondary={item.inventorySlot}/>
+            </>,
+        listItemProps: ({item, orderNumber}: StagedWishlistItem, isDragging: boolean) => ({
+            dense: true,
+            disablePadding: enableReorder,
+            secondaryAction:
+                <IconButton edge={"end"} aria-label={"delete"} color={"error"}
+                            onClick={() => handleRemove(orderNumber)}>
+                    <RemoveCircleOutlineIcon/>
+                </IconButton>,
+            style: {opacity: isDragging ? 0.4 : 1},
+            className: `wishlist-item ${item.quality.toLowerCase()}`
+        }),
+    }
     return (
         <Box display={"flex"} flexDirection={"column"} height={"300px"}>
             <SearchInput {...searchInputProps} />
-            {wishlist?.items &&
-                <List>
-                    {wishlist.items.map(wi=><WishlistDragAndDropItem moveCard={handleDragEnd} key={wi.item.itemId} wishlistItem={wi} />)}
-                </List>
+            {stagedWishlistState &&
+                <Container {...dragAndDropContainerProps}/>
             }
         </Box>
     )
 }
 
-interface DragItem {
-    index: number
-    id: string
-    type: string
-}
-
-interface WishlistDragAndDropItemProps {
-    wishlistItem: WishlistItem
-    moveCard: (dragIndex: number, hoverIndex: number) => void
-}
-
-function WishlistDragAndDropItem({wishlistItem, moveCard}: WishlistDragAndDropItemProps) {
-    const ref = useRef<HTMLLIElement>(null);
-    const [{ handlerId }, drop] = useDrop<DragItem, void, {handlerId: Identifier | null}>({
-        accept: "WishlistItem",
-        collect(monitor) {
-            return {
-                handlerId: monitor.getHandlerId()
-            }
-        },
-        hover(item: DragItem, monitor) {
-            if (!ref.current) {
-                return
-            }
-            const dragIndex = item.index
-            const hoverIndex = wishlistItem.orderNumber
-
-            // Don't replace items with themselves
-            if (dragIndex === hoverIndex) {
-                return
-            }
-
-            // Determine rectangle on screen
-            const hoverBoundingRect = ref.current?.getBoundingClientRect()
-
-            // Get vertical middle
-            const hoverMiddleY =
-                (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-
-            // Determine mouse position
-            const clientOffset = monitor.getClientOffset()
-
-            // Get pixels to the top
-            const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top
-
-            // Only perform the move when the mouse has crossed half of the items height
-            // When dragging downwards, only move when the cursor is below 50%
-            // When dragging upwards, only move when the cursor is above 50%
-
-            // Dragging downwards
-            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-                return
-            }
-
-            // Dragging upwards
-            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-                return
-            }
-
-            // Time to actually perform the action
-            moveCard(dragIndex, hoverIndex)
-
-            // Note: we're mutating the monitor item here!
-            // Generally it's better to avoid mutations,
-            // but it's good here for the sake of performance
-            // to avoid expensive index searches.
-            item.index = hoverIndex
-        }
-    })
-    const [{ isDragging }, drag] = useDrag({
-        type: "WishlistItem",
-        item: () => {
-            return { id: wishlistItem.item.itemId, index: wishlistItem.orderNumber }
-        },
-        collect: (monitor: any) => ({
-            isDragging: monitor.isDragging(),
-        }),
-    })
-    const opacity = isDragging ? 0 : 1
-    drag(drop(ref))
-    return (
-        <ListItem ref={ref} data-handler-id={handlerId} className={`wishlist-item ${wishlistItem.item.quality.toLowerCase()}`}>
-            <ListItemAvatar>
-                <Avatar>
-                    <WowheadTooltip {...wishlistItem.item}>
-                        <ItemIcon iconName={wishlistItem.item.iconName} height={40}/>
-                    </WowheadTooltip>
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={
-                <Box component={"span"}>
-                    {wishlistItem.item.name}
-                </Box>} secondary={wishlistItem.item.inventorySlot}/>
-        </ListItem>
-    )
-}
 
 export default React.memo(Wishlists);

@@ -50,6 +50,7 @@ function SearchInput(props: SearchInputProps) {
             <ClickOutsideWrapper action={() => setSearchOpen(false)}
                                  isOpen={searchOpen}>
                 <TextField
+                    placeholder={"Search for items to add to your wishlist"}
                     autoComplete={"off"}
                     fullWidth
                     value={filter}

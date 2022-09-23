@@ -4,3 +4,4 @@
 
 export * from "./isApiError";
 export * from "./isAxiosError";
+export * from "./isHasId";

@@ -25,17 +25,6 @@ function CardPresentationLayout({children, ...props}: CardPresentationLayoutProp
                 {children}
             </Box>
         </Box>
-        // <Stack direction={"column"} p={1} height={"100%"}>
-        //     <Card sx={{m: 1, height: "100%"}}>
-        //         <CardHeader title={props.title} sx={(theme) => ({
-        //             backgroundColor: theme.palette.secondary.main,
-        //             fontSize: "8px"
-        //         })} action={props.action}/>
-        //         <CardContent sx={{height: props.height ?? "100%"}}>
-        //             {children}
-        //         </CardContent>
-        //     </Card>
-        // </Stack>
     );
 }
 
