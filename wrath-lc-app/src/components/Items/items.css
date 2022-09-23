@@ -1,0 +1,109 @@
+.frame {
+    border: 2px solid #A3A3A1;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #262626 1%, #121212 40%);
+    box-shadow: 0 0 10px 1px #000;
+    display: inline-block;
+    padding: 10px;
+    width: 250px;
+    font-family: "Friz Quadrata Std Medium", serif;
+    cursor: pointer;
+}
+.frame:hover {
+    border: 2px solid gold;
+}
+
+.cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.loot-box {
+    background: #010100;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+    max-height: 35px;
+    max-width: 35px;
+}
+.loot-box img {
+    height: 30px;
+}
+
+.loot-summary {
+    padding: 0 0 0 10px;
+    top: 5px;
+    position: relative;
+}
+
+.loot-summary span {
+    display: block;
+    font-size: 14px;
+    position: relative;
+    line-height: 18px;
+}
+
+.loot-summary span:first-child {
+    color: #F2D03A;
+}
+
+.loot-summary span:last-child {
+    bottom: 5px;
+}
+
+.frame.rare .loot-box {
+    border-color: var(--item-rare-color);
+    box-shadow: inset 0 0 3px 0 var(--item-rare-color);
+}
+
+.rare .loot-summary span:last-child {
+    color: var(--item-rare-color);
+}
+
+
+.frame.uncommon .loot-box {
+    border-color: var(--item-uncommon-color);
+    box-shadow: inset 0 0 3px 0 var(--item-uncommon-color);
+}
+
+.uncommon .loot-summary span:last-child {
+    color: var(--item-uncommon-color);
+}
+
+
+.frame.epic .loot-box {
+    border-color: var(--item-epic-color);
+    box-shadow: inset 0 0 3px 0 var(--item-epic-color);
+}
+
+.epic .loot-summary span:last-child {
+    color: var(--item-epic-color);
+}
+
+
+.frame.legendary .loot-box {
+    border-color: var(--item-legendary-color);
+    box-shadow: inset 0 0 3px 0 var(--item-legendary-color);
+}
+
+.legendary .loot-summary span:last-child {
+    color: var(--item-legendary-color);
+}
+
+.frame.common .loot-box {
+    border-color: var(--item-common-color);
+    box-shadow: inset 0 0 3px 0 var(--item-common-color);
+}
+
+.common .loot-summary span:last-child {
+    color: var(--item-common-color);
+}
+
+.frame.poor .loot-box {
+    border-color: var(--item-poor-color);
+    box-shadow: inset 0 0 3px 0 var(--item-poor-color);
+}
+
+.poor .loot-summary span:last-child {
+    color: var(--item-poor-color);
+}

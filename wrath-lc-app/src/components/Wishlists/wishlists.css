@@ -1,0 +1,53 @@
+.wishlist-item {
+    border-radius: 5px;
+    font-family: "Friz Quadrata Std Medium", serif;
+    cursor: grabbing;
+}
+.wishlist-item:hover {
+    background-color: #e3f2fd;
+}
+
+.wishlist-item.rare {
+    border-color: var(--item-rare-color);
+}
+
+.wishlist-item.rare span {
+    color: var(--item-rare-color);
+}
+
+
+.wishlist-item.uncommon {
+    border-color: var(--item-uncommon-color);
+}
+
+.wishlist-item.uncommon span {
+    color: var(--item-uncommon-color);
+}
+
+.wishlist-item.epic{
+    border-color: var(--item-epic-color);
+}
+
+.wishlist-item.epic span {
+    color: var(--item-epic-color);
+}
+
+.wishlist-item.legendary{
+    border-color: var(--item-legendary-color);
+}
+
+.wishlist-item.legendary {
+    color: var(--item-legendary-color);
+}
+.wishlist-item.common{
+    border-color: var(--item-common-color);
+}
+.wishlist-item.common span{
+    color: var(--item-common-color);
+}
+.wishlist-item.poor{
+    border-color: var(--item-poor-color);
+}
+.wishlist-item.poor span{
+    color: var(--item-poor-color);
+}

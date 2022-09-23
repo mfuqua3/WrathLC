@@ -1,3 +1,22 @@
+:root {
+    --druid-color: #ff7d0a;
+    --hunter-color: #abd473;
+    --mage-color: #69ccf0;
+    --paladin-color: #f58cba;
+    --priest-color: #ffffff;
+    --rogue-color: #fff569;
+    --shaman-color: #0070de;
+    --warlock-color: #9482c9;
+    --warrior-color: #c79c6e;
+
+    --item-poor-color: #889d9d;
+    --item-common-color: #ffffff;
+    --item-uncommon-color: #1eff0c;
+    --item-rare-color: #0070ff;
+    --item-epic-color: #a335ee;
+    --item-legendary-color: #ff8000;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +29,36 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+@font-face {
+    font-family: 'Friz Quadrata Std Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Friz Quadrata Std Italic'), url('./fonts/friz-quadrata-std-italic-587033b2c95df.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Friz Quadrata Std Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Friz Quadrata Std Medium'), url('./fonts/friz-quadrata-std-medium-5870338ec7ef8.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Friz Quadrata Std Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Friz Quadrata Std Bold'), url('./fonts/friz-quadrata-std-bold-587034a220f9f.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Friz Quadrata Std Bold Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Friz Quadrata Std Bold Italic'), url('./fonts/friz-quadrata-std-bold-italic-587033d6d4298.woff') format('woff');
 }

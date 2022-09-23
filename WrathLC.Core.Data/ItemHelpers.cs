@@ -33,6 +33,7 @@ public static class ItemHelpers
         { 25, new[] { Druid, Hunter, Mage, Priest, Rogue, Shaman, Warlock, Warrior } }, //Daggers
         { 26, new[] { Hunter, Rogue, Warrior } }, //Crossbows
         { 27, new[] { Warrior, Rogue } }, //Thrown
+        { 28,  AllClasses  }, //Neck
         { 33, new[] { DeathKnight } }, //Sigils
         { 34, AllClasses }, //Trinkets
         { 47, new[] { Shaman } }, //Totems

@@ -12,6 +12,8 @@ import {SnackbarProvider} from "./utils/snackbar";
 import ModalProvider from "./utils/modal/ModalProvider";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import DrawerProvider from "./utils/drawer/DrawerProvider";
+import {DndProvider} from 'react-dnd'
+import {HTML5Backend} from 'react-dnd-html5-backend'
 
 const baseUrl = document.getElementsByTagName("base")[0].getAttribute("href");
 const rootElement = document.getElementById("root");
@@ -21,16 +23,18 @@ root.render(
     <React.StrictMode>
         <LocalizationProvider dateAdapter={AdapterMoment}>
             <ThemeProvider theme={defaultTheme}>
-                <CssBaseline/>
-                <BrowserRouter basename={baseUrl ?? undefined}>
-                    <SnackbarProvider>
-                        <ModalProvider>
-                            <DrawerProvider>
-                                <App/>
-                            </DrawerProvider>
-                        </ModalProvider>
-                    </SnackbarProvider>
-                </BrowserRouter>
+                <DndProvider backend={HTML5Backend}>
+                    <CssBaseline/>
+                    <BrowserRouter basename={baseUrl ?? undefined}>
+                        <SnackbarProvider>
+                            <ModalProvider>
+                                <DrawerProvider>
+                                    <App/>
+                                </DrawerProvider>
+                            </ModalProvider>
+                        </SnackbarProvider>
+                    </BrowserRouter>
+                </DndProvider>
             </ThemeProvider>
         </LocalizationProvider>
     </React.StrictMode>

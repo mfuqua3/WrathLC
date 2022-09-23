@@ -45,3 +45,4 @@ WrathLC.DataEngine/Items.db-wal
 *.db
 *.db-shm
 *.db-wal
+wrath-lc-app/node_modules/

@@ -41,9 +41,9 @@ function Onboarding() {
                             </Typography>
                         }>
                             <>
-                                <Button variant={"contained"} onClick={() => showModal(<CreateGuildDialog/>)}>Create a
-                                    new
-                                    Guild</Button>
+                                <Button variant={"contained"} onClick={() => showModal(<CreateGuildDialog/>)}>
+                                    Create a new Guild
+                                </Button>
                                 <Divider/>
                                 <Button variant={"contained"} onClick={() => showModal(<JoinGuildDialog/>)}>Join an
                                     Existing

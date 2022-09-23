@@ -19,7 +19,7 @@ function ClickOutsideWrapper(props: ClickOutsideWrapperProps): JSX.Element {
     }, [clickedOutside]);
 
     return (
-        <Box height={"100%"} width={"100%"} ref={wrapperRef}>
+        <Box display={"contents"} ref={wrapperRef}>
             {props.children}
         </Box>
     );
